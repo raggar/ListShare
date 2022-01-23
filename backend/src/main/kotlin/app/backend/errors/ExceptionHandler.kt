@@ -10,6 +10,14 @@ import org.springframework.web.servlet.NoHandlerFoundException
 @RestControllerAdvice
 class ExceptionHandler {
 
+  @ExceptionHandler(NoSuchUserException::class)
+  fun userNotFound(e: NoSuchUserException): ResponseEntity<ApiError> =
+      ResponseEntity(ApiError(e.message, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND)
+
+  @ExceptionHandler(InvalidPasswordException::class)
+  fun handleInvalidPassword(e: InvalidPasswordException): ResponseEntity<ApiError> =
+      ResponseEntity(ApiError(e.message, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND)
+
   @ExceptionHandler(NoSuchElementException::class)
   fun handleNotFound(e: NoSuchElementException): ResponseEntity<ApiError> =
       ResponseEntity(ApiError(e.message, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND)

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("api/hello")
 class HelloWorldController {
- 
+
   @GetMapping
   fun helloWorld(): String = "Hello user, wait there is nothing here..."
 }
