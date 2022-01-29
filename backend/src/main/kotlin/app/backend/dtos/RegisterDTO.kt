@@ -1,7 +1,8 @@
 package app.backend.dtos
 
 class RegisterDTO {
-  val name: String = ""
+  val firstname: String = ""
+  val lastname: String = ""
   val email: String = ""
   val password: String = ""
 }

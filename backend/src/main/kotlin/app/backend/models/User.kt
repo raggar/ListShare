@@ -1,7 +1,9 @@
 package app.backend.models
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.hibernate.annotations.CreationTimestamp
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -15,7 +17,10 @@ class User {
   var id: Int = 0
 
   @Column
-  var name: String = ""
+  var firstname: String = ""
+
+  @Column
+  var lastname: String = ""
 
   @Column(unique = true)
   var email: String = ""

@@ -1,9 +1,5 @@
 package app.backend.errors
 
-class NoSuchUserException(message: String? = null, cause: Throwable? = null) : Exception(message, cause) {
-  constructor(cause: Throwable?) : this(null, cause)
-}
-
-class InvalidPasswordException(message: String? = null, cause: Throwable? = null) : Exception(message, cause) {
-  constructor(cause: Throwable?) : this(null, cause)
-}
+class UnauthenticatedException(message: String) : Exception(message)
+class RegistrationException(message: String) : Exception(message)
+class LoginException(message: String) : Exception(message)

@@ -2,10 +2,15 @@ package app.backend.controller
 
 import app.backend.dtos.LoginDTO
 import app.backend.dtos.RegisterDTO
-import app.backend.errors.InvalidPasswordException
-import app.backend.errors.NoSuchUserException
+import app.backend.errors.LoginException
+import app.backend.errors.RegistrationException
 import app.backend.models.User
 import app.backend.services.UserService
+import app.backend.utils.cleanEmail
+import app.backend.utils.cleanName
+import app.backend.utils.cleanPassword
+import app.backend.utils.decodeJwt
+import app.backend.utils.isEmailValid
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.http.ResponseEntity
@@ -23,32 +28,42 @@ import javax.servlet.http.HttpServletResponse
 @RequestMapping("api")
 class AuthController(private val userService: UserService) {
 
-  @GetMapping("user")
-  fun user(@CookieValue("jwt") jwt: String?): ResponseEntity<Any> {
-    jwt ?: return ResponseEntity.status(401).body("unauthenticated")
-
-    val body = Jwts.parser().setSigningKey("secret").parseClaimsJws(jwt).body
-
-    return ResponseEntity.ok(userService.getById(body.issuer.toInt()))
+  @GetMapping("me")
+  fun user(@CookieValue("jwt") jwt: String): ResponseEntity<Any> {
+    val decodedJwt = decodeJwt(jwt)
+    return ResponseEntity.ok(userService.getById(decodedJwt.body.issuer.toInt()))
   }
 
   @PostMapping("register")
   fun register(@RequestBody body: RegisterDTO): ResponseEntity<User> {
     val user = User()
-    user.name = body.name
-    user.email = body.email
-    user.password = body.password
+
+    user.firstname = cleanName(body.firstname)
+    user.lastname = cleanName(body.lastname)
+    user.email = cleanEmail(body.email)
+    user.password = cleanPassword(body.password)
+
+    if (userService.findByEmail(user.email) != null) {
+      throw RegistrationException("Email in use!")
+    }
+
+    if (!isEmailValid(user.email)) {
+      throw RegistrationException("Email is invalid!")
+    }
 
     return ResponseEntity.ok(userService.save(user))
   }
 
   @PostMapping("login")
   fun login(@RequestBody body: LoginDTO, response: HttpServletResponse): ResponseEntity<Any> {
-    val user = userService.findByEmail(body.email)
-        ?: throw NoSuchUserException("User with email ${body.email} not found!")
+    val email = cleanEmail(body.email)
+    val password = cleanPassword(body.password)
 
-    if (!user.comparePassword(body.password)) {
-      throw InvalidPasswordException("Invalid password entered for ${body.email}!")
+    val user = userService.findByEmail(email)
+        ?: throw LoginException("Email not found!")
+
+    if (!user.comparePassword(password)) {
+      throw LoginException("Invalid password!")
     }
 
     val issuer = user.id.toString()
@@ -56,7 +71,7 @@ class AuthController(private val userService: UserService) {
     val jwt = Jwts.builder()
         .setIssuer(issuer)
         .setExpiration(Date(System.currentTimeMillis() + 60 * 24 * 1000))
-        .signWith(SignatureAlgorithm.ES512, "secret") // 1 day
+        .signWith(SignatureAlgorithm.HS512, "secret") // 1 day
         .compact()
 
     val cookie = Cookie("jwt", jwt)
@@ -64,7 +79,7 @@ class AuthController(private val userService: UserService) {
 
     response.addCookie(cookie)
 
-    return ResponseEntity.ok("Success")
+    return ResponseEntity.ok("Successfully logged in.")
   }
 
   @PostMapping("logout")
@@ -72,6 +87,6 @@ class AuthController(private val userService: UserService) {
     val cookie = Cookie("jwt", "")
     cookie.maxAge = 0
     response.addCookie(cookie)
-    return ResponseEntity.ok("Success")
+    return ResponseEntity.ok("Successfully logged out.")
   }
 }
