@@ -1,19 +1,24 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserContextProvider } from "./contexts/UserContext";
-
-const Content: React.FC = () => (
-  <div className="App">
-    <header className="App-header">
-      <div>Hello World</div>
-    </header>
-  </div>
-);
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import GlobalStyle from "./styles/global";
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   return (
-    <UserContextProvider>
-      <Content />
-    </UserContextProvider>
+    <>
+      <GlobalStyle />
+      <UserContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="profile" element={<Profile />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContextProvider>
+    </>
   );
 }
 
