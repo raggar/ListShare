@@ -1,5 +1,6 @@
 package app.backend.controller
 
+import app.backend.JWT_SECRET
 import app.backend.dtos.LoginDTO
 import app.backend.dtos.RegisterDTO
 import app.backend.errors.LoginException
@@ -61,7 +62,7 @@ class AuthController(private val userService: UserService) {
 
     val jwt = Jwts.builder()
         .setIssuer(issuer)
-        .signWith(SignatureAlgorithm.HS512, "secret") // 1 day
+        .signWith(SignatureAlgorithm.HS512, JWT_SECRET) // 1 day
         .compact()
 
     val cookie = Cookie("jwt", jwt)
