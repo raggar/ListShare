@@ -1,6 +1,6 @@
 package app.backend
 
-import app.backend.utils.AuthInterceptor
+import app.backend.interceptors.AuthInterceptor
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
@@ -11,7 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @EnableWebMvc
 class WebConfig : WebMvcConfigurer {
   override fun addInterceptors(registry: InterceptorRegistry) {
-    registry.addInterceptor(AuthInterceptor())
+    registry.addInterceptor(AuthInterceptor()).excludePathPatterns("/api/auth/**")
+    super.addInterceptors(registry)
   }
 
   override fun addCorsMappings(registry: CorsRegistry) {

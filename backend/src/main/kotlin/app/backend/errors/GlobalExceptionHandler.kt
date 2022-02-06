@@ -15,6 +15,10 @@ class GlobalExceptionHandler : DefaultErrorHandler() {
   fun handleRegistrationException(e: RegistrationException): ResponseEntity<ApiError> =
       ResponseEntity(ApiError(e.message, HttpStatus.UNAUTHORIZED), HttpStatus.UNAUTHORIZED)
 
+  @ExceptionHandler(ResourceNotFoundException::class)
+  fun handleResourceNotFoundException(e: ResourceNotFoundException): ResponseEntity<ApiError> =
+      ResponseEntity(ApiError(e.message, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND)
+
   @ExceptionHandler(LoginException::class)
   fun handleLoginException(e: LoginException): ResponseEntity<ApiError> =
       ResponseEntity(ApiError(e.message, HttpStatus.UNAUTHORIZED), HttpStatus.UNAUTHORIZED)

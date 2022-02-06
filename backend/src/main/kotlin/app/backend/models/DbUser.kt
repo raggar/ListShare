@@ -1,31 +1,37 @@
 package app.backend.models
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import org.hibernate.annotations.CreationTimestamp
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import java.time.LocalDateTime
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
-@Entity
-class User {
+@Entity(name = "DbUser")
+@Table(name = "db_users")
+class DbUser {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  var id: Int = 0
+  val id: Int = 0
 
-  @Column
+  @Column(nullable = false)
   var firstname: String = ""
 
-  @Column
+  @Column(nullable = false)
   var lastname: String = ""
 
-  @Column(unique = true)
+  @Column(unique = true, nullable = false)
   var email: String = ""
 
-  @Column
+  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+  var lists: MutableList<DbList> = mutableListOf()
+
+  @Column(nullable = false)
   var password: String = ""
     @JsonIgnore // ignore password field when returning a user
     get() = field

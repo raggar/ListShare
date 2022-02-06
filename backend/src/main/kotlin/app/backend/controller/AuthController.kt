@@ -4,18 +4,15 @@ import app.backend.dtos.LoginDTO
 import app.backend.dtos.RegisterDTO
 import app.backend.errors.LoginException
 import app.backend.errors.RegistrationException
-import app.backend.models.User
+import app.backend.models.DbUser
 import app.backend.services.UserService
 import app.backend.utils.cleanEmail
 import app.backend.utils.cleanName
 import app.backend.utils.cleanPassword
-import app.backend.utils.decodeJwt
 import app.backend.utils.isEmailValid
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.CookieValue
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -25,37 +22,31 @@ import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletResponse
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/auth")
 class AuthController(private val userService: UserService) {
 
-  @GetMapping("me")
-  fun user(@CookieValue("jwt") jwt: String): ResponseEntity<Any> {
-    val decodedJwt = decodeJwt(jwt)
-    return ResponseEntity.ok(userService.getById(decodedJwt.body.issuer.toInt()))
-  }
-
   @PostMapping("register")
-  fun register(@RequestBody body: RegisterDTO): ResponseEntity<User> {
-    val user = User()
+  fun register(@RequestBody body: RegisterDTO): ResponseEntity<DbUser> {
+    val user = DbUser()
 
     user.firstname = cleanName(body.firstname)
     user.lastname = cleanName(body.lastname)
     user.email = cleanEmail(body.email)
     user.password = cleanPassword(body.password)
 
-    if (userService.findByEmail(user.email) != null) {
-      throw RegistrationException("Email in use!")
-    }
-
     if (!isEmailValid(user.email)) {
       throw RegistrationException("Email is invalid!")
+    }
+
+    if (userService.findByEmail(user.email) != null) {
+      throw RegistrationException("Email in use!")
     }
 
     return ResponseEntity.ok(userService.save(user))
   }
 
   @PostMapping("login")
-  fun login(@RequestBody body: LoginDTO, response: HttpServletResponse): ResponseEntity<Any> {
+  fun login(@RequestBody body: LoginDTO, response: HttpServletResponse): ResponseEntity<DbUser> {
     val email = cleanEmail(body.email)
     val password = cleanPassword(body.password)
 
@@ -70,7 +61,6 @@ class AuthController(private val userService: UserService) {
 
     val jwt = Jwts.builder()
         .setIssuer(issuer)
-        .setExpiration(Date(System.currentTimeMillis() + 60 * 24 * 1000))
         .signWith(SignatureAlgorithm.HS512, "secret") // 1 day
         .compact()
 
@@ -79,11 +69,11 @@ class AuthController(private val userService: UserService) {
 
     response.addCookie(cookie)
 
-    return ResponseEntity.ok("Successfully logged in.")
+    return ResponseEntity.ok(user)
   }
 
   @PostMapping("logout")
-  fun logout(response: HttpServletResponse): ResponseEntity<Any> {
+  fun logout(response: HttpServletResponse): ResponseEntity<String> {
     val cookie = Cookie("jwt", "")
     cookie.maxAge = 0
     response.addCookie(cookie)

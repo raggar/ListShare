@@ -1,8 +1,8 @@
 package app.backend.repositories
 
-import app.backend.models.User
+import app.backend.models.DbUser
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface UserRepository : JpaRepository<User, Int> {
-  fun findByEmail(email: String): User?
+interface UserRepository : JpaRepository<DbUser, Int> {
+  fun findByEmail(email: String): DbUser?
 }
