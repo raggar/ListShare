@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import styles from "../../../styles/styles";
 import Circle from "../Circle";
+import { ReactIcon } from "../ReactIcon";
 
 type Props = ComponentPropsWithoutRef<"div">;
 
@@ -58,7 +59,11 @@ const DropCircle: React.FC<DropCircleProps> = (props: DropCircleProps) => {
         <Row>
           <Title direction="horizontal" onClick={() => setIsOpen(!isOpen)}>
             <StyledCircle
-              icon={isOpen ? MdExpandLess : MdExpandMore}
+              icon={
+                isOpen
+                  ? ReactIcon(MdExpandLess, 22)
+                  : ReactIcon(MdExpandMore, 22)
+              }
               background={props.background}
             />
             <DropTitle className="my-auto ms-3">{props.title}</DropTitle>
