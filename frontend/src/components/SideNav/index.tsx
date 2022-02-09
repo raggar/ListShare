@@ -7,6 +7,7 @@ import { MdBookmark, MdHomeFilled, MdSearch } from "react-icons/md";
 import NavTopItem from "./NavTopItem";
 import Spacer from "../base/Spacer";
 import { ICategory } from "../../data/ICategory";
+import NewListButton from "./NewListButton";
 
 interface SideNavProps {
   isLoggedIn?: boolean;
@@ -40,12 +41,13 @@ const BottomWrapper = styled.div`
 const MiddleWrapper = styled.div`
   background-color: ${styles.colors.white};
   padding: ${styles.spacing[4]};
+  padding-top: 0;
+  position: relative;
   overflow-y: auto;
   flex-grow: 1;
   width: 100%;
-  z-index: 10;
   left: 0;
-  top: 0;
+  top: -${styles.spacing[3]};
 
   :after {
     position: fixed;
@@ -64,6 +66,7 @@ const MiddleWrapper = styled.div`
 const TopWrapper = styled.div`
   background-color: ${styles.colors.background};
   padding: ${styles.spacing[5]};
+  padding-bottom: ${styles.spacing[8]};
   width: 100%;
   position: sticky;
   z-index: 10;
@@ -129,6 +132,7 @@ const SideNav = (props: SideNavProps) => {
         <NavTopItem name="your lists" icon={MdBookmark} link="/lists" />
       </TopWrapper>
       <MiddleWrapper>
+      <NewListButton />
         {categories.map(
           ({ category_name, category_lists }, category_i, { length }) => {
             return (
