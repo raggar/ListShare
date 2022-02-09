@@ -15,7 +15,7 @@ const StyledButton = styled.button<ButtonProps>`
     primary ? styles.colors.white : styles.colors.black};
   border: 1px solid ${styles.colors.black};
   outline: none;
-  padding: ${styles.spacing.sm};
+  padding: 12px;
   min-width: 150px;
 `;
 

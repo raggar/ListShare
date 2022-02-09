@@ -1,23 +1,21 @@
 import React, { ComponentPropsWithoutRef } from "react";
-import { ChevronDown, ChevronUp, Icon } from "react-feather";
 import styled from "styled-components";
-import styles from "../../../styles/styles";
-import { FeatherIcon } from "../Icon";
+import { ReactIcon } from "../ReactIcon";
 
-type Props = ComponentPropsWithoutRef<"button">;
+type Props = ComponentPropsWithoutRef<"div">;
 
 interface CircleProps extends Props {
   open?: boolean;
   size?: number;
   background?: string;
-  icon: Icon;
+  icon: any;
 }
 
-const StyledCircle = styled.button<CircleProps>`
+const StyledCircle = styled.div<CircleProps>`
   height: ${({ size }) => (size ? size : 36)}px;
   width: ${({ size }) => (size ? size : 36)}px;
-  border: 1px solid ${styles.colors.black};
-  border-radius: ${({ size }) => (size ? size : 36)}px;
+  border: 0.5px solid;
+  border-radius: 50%;
   background-color: ${({ background }) => background};
   position: relative;
 `;
@@ -32,7 +30,7 @@ const IconWrapper = styled.div`
 function DropCircle(props: CircleProps) {
   return (
     <StyledCircle {...props}>
-      <IconWrapper>{FeatherIcon(props.icon, 24)}</IconWrapper>
+      <IconWrapper>{ReactIcon(props.icon, 22)}</IconWrapper>
     </StyledCircle>
   );
 }

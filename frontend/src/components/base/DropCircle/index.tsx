@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, useState } from "react";
-import { Col, Row, Stack } from "react-bootstrap";
-import { ChevronDown, ChevronUp } from "react-feather";
+import { Row, Stack } from "react-bootstrap";
 import styled from "styled-components";
+import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import styles from "../../../styles/styles";
 import Circle from "../Circle";
 
@@ -12,19 +12,25 @@ interface DropCircleProps extends Props {
   size?: number;
   title?: string;
   last?: boolean;
+  background?: string;
+  onClick?: () => void;
 }
 
 const Wrapper = styled.div<DropCircleProps>`
-  border-left: ${({ last }) => (!last && `1px solid ${styles.colors.black}`)};
+  border-left: ${({ last }) => !last && `0.5px solid ${styles.colors.dark}`};
   margin-left: 18px;
-  padding: ${styles.spacing.md};
-  padding-bottom: ${styles.spacing.md};
+  padding: ${styles.spacing[3]};
   padding-top: 0;
   position: relative;
 `;
 
 const Title = styled(Stack)`
-  height: ${({ size }) => (size ?? 36)}px;
+  height: ${({ size }) => size ?? 36}px;
+
+  &:hover {
+    cursor: pointer;
+    color: ${styles.colors.text.accent};
+  }
 `;
 
 const StyledCircle = styled(Circle)`
@@ -34,6 +40,7 @@ const StyledCircle = styled(Circle)`
 
 const Details = styled.div`
   color: ${styles.colors.text.secondary};
+  transition: max-height 0.7s, opacity 3s, visibility 4s ease;
 `;
 
 const DropTitle = styled.span`
@@ -49,10 +56,10 @@ const DropCircle: React.FC<DropCircleProps> = (props: DropCircleProps) => {
     <>
       <Wrapper last={props.last}>
         <Row>
-          <Title direction="horizontal">
+          <Title direction="horizontal" onClick={() => setIsOpen(!isOpen)}>
             <StyledCircle
-              icon={isOpen ? ChevronUp : ChevronDown}
-              onClick={() => setIsOpen(!isOpen)}
+              icon={isOpen ? MdExpandLess : MdExpandMore}
+              background={props.background}
             />
             <DropTitle className="my-auto ms-3">{props.title}</DropTitle>
           </Title>

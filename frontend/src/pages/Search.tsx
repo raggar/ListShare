@@ -13,7 +13,7 @@ const StyledContent = styled(Content)`
   height: 100%;
 `;
 
-function Home() {
+function Search() {
   return (
     <>
       <SideNav />
@@ -22,4 +22,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Search;
