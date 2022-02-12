@@ -1,24 +1,12 @@
 import React from "react";
-import styled from "styled-components";
-import SideNav from "../components/SideNav";
-
-const Content: React.FC = () => (
-  <>
-    <p>hello</p>
-  </>
-);
-
-const StyledContent = styled(Content)`
-  width: 100%;
-  height: 100%;
-`;
+import PageWrapper from "./PageWrapper";
+import { PageContent } from "./styled";
 
 function Search() {
   return (
-    <>
-      <SideNav />
-      <StyledContent />
-    </>
+    <PageWrapper>
+      <PageContent>search</PageContent>
+    </PageWrapper>
   );
 }
 

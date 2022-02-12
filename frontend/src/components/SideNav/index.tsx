@@ -180,7 +180,7 @@ const SideNav = (props: SideNavProps) => {
       <BottomWrapper>
         {props.isLoggedIn ? (
           <Button primary className="w-100">
-            profile
+            your profile
           </Button>
         ) : (
           <Button primary className="w-100">
