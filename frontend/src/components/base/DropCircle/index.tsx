@@ -56,7 +56,7 @@ const DropCircle: React.FC<DropCircleProps> = (props: DropCircleProps) => {
 
   return (
     <>
-      <Wrapper last={props.last}>
+      <Wrapper {...props}>
         <Row>
           <Title direction="horizontal" onClick={() => setIsOpen(!isOpen)}>
             <StyledCircle
