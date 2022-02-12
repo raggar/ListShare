@@ -8,7 +8,7 @@ interface CircleProps extends Props {
   open?: boolean;
   size?: number;
   background?: string;
-  icon: any;
+  icon?: JSX.Element;
 }
 
 const StyledCircle = styled.div<CircleProps>`
@@ -27,12 +27,12 @@ const IconWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-function DropCircle(props: CircleProps) {
+function Circle(props: CircleProps) {
   return (
     <StyledCircle {...props}>
-      <IconWrapper>{ReactIcon(props.icon, 22)}</IconWrapper>
+      <IconWrapper>{props.icon}</IconWrapper>
     </StyledCircle>
   );
 }
 
-export default DropCircle;
+export default Circle;
