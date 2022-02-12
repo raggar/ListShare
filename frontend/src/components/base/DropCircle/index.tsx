@@ -13,6 +13,7 @@ interface DropCircleProps extends Props {
   size?: number;
   title?: string;
   last?: boolean;
+  first?: boolean;
   background?: string;
   onClick?: () => void;
 }
@@ -21,7 +22,7 @@ const Wrapper = styled.div<DropCircleProps>`
   border-left: ${({ last }) => !last && `0.5px solid ${styles.colors.dark}`};
   margin-left: 18px;
   padding: ${styles.spacing[3]};
-  padding-top: 0;
+  padding-top: ${({ first }) => (first ? styles.spacing[6] : styles.spacing[0])};
   position: relative;
 `;
 

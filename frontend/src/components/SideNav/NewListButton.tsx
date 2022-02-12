@@ -5,16 +5,7 @@ import styles from "../../styles/styles";
 import { ReactIcon } from "../base/ReactIcon";
 import Circle from "../base/Circle";
 
-const Wrapper = styled.div`
-  border-left: 0.5px solid ${styles.colors.dark};
-  margin-left: 18px;
-  padding-bottom: ${styles.spacing[3]};
-  position: relative;
-`;
-
-const StyledCircle = styled(Circle).attrs({size: 48})`
-  left: -24px;
-  position: relative;
+const StyledCircle = styled(Circle).attrs({ size: 48 })`
   z-index: 999;
 
   :hover {
@@ -26,12 +17,10 @@ const StyledCircle = styled(Circle).attrs({size: 48})`
 const NewListButton: React.FC = () => {
   return (
     <>
-      <Wrapper>
         <StyledCircle
           icon={ReactIcon(MdAdd, 24, styles.colors.text.light)}
           background={styles.colors.dark}
         />
-      </Wrapper>
     </>
   );
 };
