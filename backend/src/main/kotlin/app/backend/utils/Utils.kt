@@ -1,6 +1,7 @@
 package app.backend.utils
 
 import app.backend.JWT_SECRET
+import app.backend.errors.UnauthenticatedException
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 
@@ -11,4 +12,9 @@ fun cleanName(name: String) = capitalize(name.trim())
 fun cleanEmail(email: String) = email.trim().lowercase()
 fun cleanPassword(password: String) = password.trim()
 
-fun decodeJwt(jwt: String): Claims = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(jwt).body
+fun decodeJwt(jwt: String?): Claims {
+  if (jwt == null) {
+    throw UnauthenticatedException("Missing Jwt")
+  }
+  return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(jwt).body
+}

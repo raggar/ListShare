@@ -23,10 +23,10 @@ import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletResponse
 
 @RestController
-@RequestMapping("api/auth")
+@RequestMapping("/api/auth")
 class AuthController(private val userService: UserService) {
 
-  @PostMapping("register")
+  @PostMapping("/register")
   fun register(@RequestBody body: RegisterDTO): ResponseEntity<DbUser> {
     val user = DbUser()
 
@@ -46,7 +46,7 @@ class AuthController(private val userService: UserService) {
     return ResponseEntity.ok(userService.save(user))
   }
 
-  @PostMapping("login")
+  @PostMapping("/login")
   fun login(@RequestBody body: LoginDTO, response: HttpServletResponse): ResponseEntity<DbUser> {
     val email = cleanEmail(body.email)
     val password = cleanPassword(body.password)
@@ -62,18 +62,19 @@ class AuthController(private val userService: UserService) {
 
     val jwt = Jwts.builder()
         .setIssuer(issuer)
-        .signWith(SignatureAlgorithm.HS512, JWT_SECRET) // 1 day
+        .setExpiration(Date(System.currentTimeMillis() + 60*60*24*1000))
+        .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
         .compact()
 
     val cookie = Cookie("jwt", jwt)
     cookie.isHttpOnly = true
 
-    response.addCookie(cookie)
+    response.writer.append(jwt)
 
     return ResponseEntity.ok(user)
   }
 
-  @PostMapping("logout")
+  @PostMapping("/logout")
   fun logout(response: HttpServletResponse): ResponseEntity<String> {
     val cookie = Cookie("jwt", "")
     cookie.maxAge = 0

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("api/lists/")
+@RequestMapping("/api/lists")
 class ListController(private val listService: ListService) {
-  @GetMapping("/")
+  @GetMapping("")
   fun getAll(@CookieValue("jwt") jwt: String?): ResponseEntity<MutableList<DbList>> {
     return ResponseEntity.ok(listService.findAll())
   }
