@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.Date
-import javax.servlet.http.Cookie
-import javax.servlet.http.HttpServletResponse
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("/api/auth")
@@ -47,7 +46,7 @@ class AuthController(private val userService: UserService) {
   }
 
   @PostMapping("/login")
-  fun login(@RequestBody body: LoginDTO, response: HttpServletResponse): ResponseEntity<DbUser> {
+  fun login(request: HttpServletRequest, @RequestBody body: LoginDTO): ResponseEntity<DbUser> {
     val email = cleanEmail(body.email)
     val password = cleanPassword(body.password)
 
@@ -62,23 +61,18 @@ class AuthController(private val userService: UserService) {
 
     val jwt = Jwts.builder()
         .setIssuer(issuer)
-        .setExpiration(Date(System.currentTimeMillis() + 60*60*24*1000))
+        .setExpiration(Date(System.currentTimeMillis() + 60 * 60 * 24 * 1000))
         .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
         .compact()
 
-    val cookie = Cookie("jwt", jwt)
-    cookie.isHttpOnly = true
-
-    response.writer.append(jwt)
+    request.session.setAttribute("token", jwt)
 
     return ResponseEntity.ok(user)
   }
 
   @PostMapping("/logout")
-  fun logout(response: HttpServletResponse): ResponseEntity<String> {
-    val cookie = Cookie("jwt", "")
-    cookie.maxAge = 0
-    response.addCookie(cookie)
+  fun logout(request: HttpServletRequest): ResponseEntity<String> {
+    request.session.removeAttribute("token")
     return ResponseEntity.ok("Successfully logged out.")
   }
 }

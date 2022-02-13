@@ -11,37 +11,41 @@ import org.springframework.web.bind.annotation.CookieValue
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("/api/users")
 class UserController(private val userService: UserService) {
   @GetMapping("")
-  fun getAll(@CookieValue("jwt") jwt: String?): ResponseEntity<MutableList<DbUser>> {
-    decodeJwt(jwt)
+  fun getAll(request: HttpServletRequest): ResponseEntity<MutableList<DbUser>> {
+    decodeJwt(request)
     return ResponseEntity.ok(userService.findAll())
   }
 
   @GetMapping("/me")
-  fun user(@CookieValue("jwt") jwt: String?): ResponseEntity<DbUser> {
-    val decodedJwt = decodeJwt(jwt)
+  fun user(request: HttpServletRequest): ResponseEntity<DbUser> {
+    val decodedJwt = decodeJwt(request)
     val user = userService.findByIdOrNull(decodedJwt.issuer.toInt()) ?: throw ResourceNotFoundException()
     return ResponseEntity.ok(user)
   }
 
   @GetMapping("/{user_id}/lists")
-  fun getLists(@CookieValue("jwt") jwt: String?, @PathVariable("user_id") userId: String): ResponseEntity<MutableList<DbList>> {
-    decodeJwt(jwt)
+  fun getLists(request: HttpServletRequest, @PathVariable("user_id") userId: String): ResponseEntity<MutableList<DbList>> {
+    decodeJwt(request)
     val user = userService.findByIdOrNull(userId.toInt()) ?: throw ResourceNotFoundException()
     return ResponseEntity.ok(user.lists)
   }
 
-  @PostMapping("/me/add_list")
-  fun addList(@CookieValue("jwt") jwt: String?, @RequestBody body: CreateListDTO): ResponseEntity<Any> {
-    val decodedJwt = decodeJwt(jwt)
+
+  @PostMapping("/add_list")
+  fun addList(request: HttpServletRequest, @RequestBody body: CreateListDTO): ResponseEntity<Any> {
+    val decodedJwt = decodeJwt(request)
     val listToCreate = DbList()
+
     listToCreate.name = body.name
     listToCreate.shareLink = body.shareLink
     listToCreate.comment = body.comment
