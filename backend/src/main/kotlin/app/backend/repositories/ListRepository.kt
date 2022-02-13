@@ -4,5 +4,5 @@ import app.backend.models.DbList
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface ListRepository : JpaRepository<DbList, Int> {
-  fun findByCategory(category: String): MutableList<DbList>
+  fun findByCategory(category: String): List<DbList>
 }

@@ -7,11 +7,9 @@ import app.backend.models.DbUser
 import app.backend.services.UserService
 import app.backend.utils.decodeJwt
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.CookieValue
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -20,8 +18,8 @@ import javax.servlet.http.HttpServletRequest
 @RestController
 @RequestMapping("/api/users")
 class UserController(private val userService: UserService) {
-  @GetMapping("")
-  fun getAll(request: HttpServletRequest): ResponseEntity<MutableList<DbUser>> {
+  @GetMapping("/all")
+  fun getAllUsers(request: HttpServletRequest): ResponseEntity<List<DbUser>> {
     decodeJwt(request)
     return ResponseEntity.ok(userService.findAll())
   }
@@ -34,15 +32,14 @@ class UserController(private val userService: UserService) {
   }
 
   @GetMapping("/{user_id}/lists")
-  fun getLists(request: HttpServletRequest, @PathVariable("user_id") userId: String): ResponseEntity<MutableList<DbList>> {
+  fun getLists(request: HttpServletRequest, @PathVariable("user_id") userId: String): ResponseEntity<List<DbList>> {
     decodeJwt(request)
     val user = userService.findByIdOrNull(userId.toInt()) ?: throw ResourceNotFoundException()
     return ResponseEntity.ok(user.lists)
   }
 
-
   @PostMapping("/add_list")
-  fun addList(request: HttpServletRequest, @RequestBody body: CreateListDTO): ResponseEntity<Any> {
+  fun addList(request: HttpServletRequest, @RequestBody body: CreateListDTO): ResponseEntity<DbList> {
     val decodedJwt = decodeJwt(request)
     val listToCreate = DbList()
 
