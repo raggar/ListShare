@@ -1,13 +1,11 @@
 import React from "react";
-import styled from "styled-components";
+import PageWrapper from "./PageWrapper";
+import { PageContent } from "./styled";
 
-const Content: React.FC = () => <p>hello</p>;
-
-const StyledContent = styled(Content)`
-  width: 100%;
-  height: 100%;
-`;
-
-const Home: React.FC = () => <StyledContent />;
+const Home: React.FC = () => (
+  <PageWrapper>
+    <PageContent>homepage</PageContent>
+  </PageWrapper>
+);
 
 export default Home;
