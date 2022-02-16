@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserService(private val userRepository: UserRepository, private val listRepository: ListRepository) {
-  fun findAll(): MutableList<DbUser> = userRepository.findAll()
+  fun findAll(): List<DbUser> = userRepository.findAll()
 
   fun save(user: DbUser): DbUser = userRepository.save(user)
 

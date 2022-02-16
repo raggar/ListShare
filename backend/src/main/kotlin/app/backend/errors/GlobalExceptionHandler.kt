@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class GlobalExceptionHandler : DefaultErrorHandler() {
   @ExceptionHandler(UnauthenticatedException::class)
   fun handleUnauthenticated(e: UnauthenticatedException): ResponseEntity<ApiError> =
-      ResponseEntity(ApiError(e.message, HttpStatus.UNAUTHORIZED), HttpStatus.UNAUTHORIZED)
+      ResponseEntity(ApiError(e.message), HttpStatus.UNAUTHORIZED)
 
   @ExceptionHandler(RegistrationException::class)
   fun handleRegistrationException(e: RegistrationException): ResponseEntity<ApiError> =
-      ResponseEntity(ApiError(e.message, HttpStatus.UNAUTHORIZED), HttpStatus.UNAUTHORIZED)
-
-  @ExceptionHandler(ResourceNotFoundException::class)
-  fun handleResourceNotFoundException(e: ResourceNotFoundException): ResponseEntity<ApiError> =
-      ResponseEntity(ApiError(e.message, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND)
+      ResponseEntity(ApiError(e.message), HttpStatus.UNAUTHORIZED)
 
   @ExceptionHandler(LoginException::class)
   fun handleLoginException(e: LoginException): ResponseEntity<ApiError> =
-      ResponseEntity(ApiError(e.message, HttpStatus.UNAUTHORIZED), HttpStatus.UNAUTHORIZED)
+      ResponseEntity(ApiError(e.message), HttpStatus.UNAUTHORIZED)
+
+  @ExceptionHandler(ResourceNotFoundException::class)
+  fun handleResourceNotFoundException(e: ResourceNotFoundException): ResponseEntity<ApiError> =
+      ResponseEntity(ApiError(e.message), HttpStatus.NOT_FOUND)
 }
