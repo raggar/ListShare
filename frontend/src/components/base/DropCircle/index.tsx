@@ -13,16 +13,28 @@ interface DropCircleProps extends Props {
   size?: number;
   title?: string;
   last?: boolean;
+  first?: boolean;
   background?: string;
+  isProductDropdown?: boolean;
   onClick?: () => void;
+  setState?: (open: boolean) => void;
 }
 
 const Wrapper = styled.div<DropCircleProps>`
   border-left: ${({ last }) => !last && `0.5px solid ${styles.colors.dark}`};
   margin-left: 18px;
   padding: ${styles.spacing[3]};
-  padding-top: 0;
+  padding-top: ${({ first }) =>
+    first ? styles.spacing[6] : styles.spacing[0]};
+  padding-bottom: ${({ last }) =>
+    last ? styles.spacing[0] : styles.spacing[3]};
   position: relative;
+`;
+
+const TopWrapper = styled.div`
+  border-left: 0.5px solid ${styles.colors.dark};
+  margin-left: -${styles.spacing[3]};
+  height: ${styles.spacing[3]};
 `;
 
 const Title = styled(Stack)`
@@ -55,9 +67,16 @@ const DropCircle: React.FC<DropCircleProps> = (props: DropCircleProps) => {
 
   return (
     <>
-      <Wrapper last={props.last}>
+      <Wrapper {...props}>
+        {props.isProductDropdown && <TopWrapper />}
         <Row>
-          <Title direction="horizontal" onClick={() => setIsOpen(!isOpen)}>
+          <Title
+            direction="horizontal"
+            onClick={() => {
+              setIsOpen(!isOpen);
+              if (props.setState) props.setState(!isOpen);
+            }}
+          >
             <StyledCircle
               icon={
                 isOpen
