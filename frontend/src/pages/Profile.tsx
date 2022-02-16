@@ -2,8 +2,6 @@ import React from "react";
 
 const Content: React.FC = () => <div>Profile Page</div>;
 
-function Profile() {
-  return <Content />;
-}
+const Profile: React.FC = () => <Content />;
 
 export default Profile;

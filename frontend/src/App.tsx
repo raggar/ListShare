@@ -1,27 +1,28 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { UserContextProvider } from "./contexts/UserContext";
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+import { Home, Search, Lists, Profile } from "./pages";
 import GlobalStyle from "./styles/global";
 import "bootstrap/dist/css/bootstrap.css";
-import Search from "./pages/Search";
-import Lists from "./pages/Lists";
+import { BaseRoute } from "./constants/routes";
+import SideNav from "./components/SideNav";
+
+const AppContent: React.FC = () => (
+  <BrowserRouter>
+    <SideNav />
+    <Routes>
+      <Route path={BaseRoute.HOME} element={<Home />} />
+      <Route path={BaseRoute.SEARCH} element={<Search />} />
+      <Route path={BaseRoute.LISTS} element={<Lists />} />
+      <Route path={BaseRoute.PROFILE} element={<Profile />} />
+    </Routes>
+  </BrowserRouter>
+);
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <UserContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="search" element={<Search />} />
-            <Route path="lists" element={<Lists />} />
-            <Route path="profile" element={<Profile />} />
-          </Routes>
-        </BrowserRouter>
-      </UserContextProvider>
+      <AppContent />
     </>
   );
 }

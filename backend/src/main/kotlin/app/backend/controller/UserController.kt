@@ -5,7 +5,7 @@ import app.backend.errors.ResourceNotFoundException
 import app.backend.models.DbList
 import app.backend.models.DbUser
 import app.backend.services.UserService
-import app.backend.utils.decodeJwt
+import app.backend.util.decodeJwt
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

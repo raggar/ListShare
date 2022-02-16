@@ -132,7 +132,7 @@ const SideNav = (props: SideNavProps) => {
         <NavTopItem name="your lists" icon={MdBookmark} link="/lists" />
       </TopWrapper>
       <MiddleWrapper>
-      <NewListButton />
+        <NewListButton />
         {categories.map(
           ({ category_name, category_lists }, category_i, { length }) => {
             return (

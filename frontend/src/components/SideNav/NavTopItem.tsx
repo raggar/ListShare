@@ -24,7 +24,7 @@ const StyledStack = styled(Stack).attrs({ direction: "horizontal" })`
 
 const NavTopItem = (props: NavTopItemProps) => {
   return (
-    <Link to={props.link} style={{ textDecoration: 'none' }}>
+    <Link to={props.link} style={{ textDecoration: "none" }}>
       <StyledStack className="align-items-center">
         {ReactIcon(props.icon, 22)}
         <Spacer width={32} />
