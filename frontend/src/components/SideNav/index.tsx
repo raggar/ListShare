@@ -7,7 +7,7 @@ import { MdBookmark, MdHomeFilled, MdSearch } from "react-icons/md";
 import NavTopItem from "./NavTopItem";
 import Spacer from "../base/Spacer";
 import { ICategory } from "../../data/ICategory";
-import NewListButton from "./NewListButton";
+import NewButton from "../base/Button/NewButton";
 
 interface SideNavProps {
   isLoggedIn?: boolean;
@@ -149,7 +149,7 @@ const SideNav = (props: SideNavProps) => {
         <Spacer height={24} />
         <NavTopItem name="your lists" icon={MdBookmark} link="/lists" />
         <ButtonWrapper>
-          <NewListButton/>
+          <NewButton />
         </ButtonWrapper>
       </TopWrapper>
       <MiddleWrapper>
