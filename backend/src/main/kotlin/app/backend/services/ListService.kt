@@ -26,17 +26,9 @@ class ListService(private val listRepository: ListRepository, private val produc
   fun updateList(listId: Int, body: UpdateListDTO): DbList? {
     val list = listRepository.findByIdOrNull(listId) ?: throw ResourceNotFoundException()
 
-    if (body.name != null) {
-      list.name = body.name
-    }
-
-    if (body.shareLink != null) {
-      list.shareLink = body.shareLink
-    }
-
-    if (body.comment != null) {
-      list.comment = body.comment
-    }
+    list.name = body.name ?: list.name
+    list.shareLink = body.shareLink ?: list.shareLink
+    list.comment = body.comment ?: list.comment
 
     return listRepository.save(list)
   }

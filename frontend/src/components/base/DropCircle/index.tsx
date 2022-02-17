@@ -3,8 +3,7 @@ import { Row, Stack } from "react-bootstrap";
 import styled from "styled-components";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import styles from "../../../styles/styles";
-import Circle from "../Circle";
-import { ReactIcon } from "../ReactIcon";
+import { Circle, ReactIcon } from "../";
 
 type Props = ComponentPropsWithoutRef<"div">;
 

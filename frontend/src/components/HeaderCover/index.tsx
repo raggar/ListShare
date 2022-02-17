@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import styles from "../../styles/styles";
 import { Container } from "react-bootstrap";
-import Typography from "../base/Typography";
-import Spacer from "../base/Spacer";
+import { Typography, Spacer } from "../";
 
 const HeaderImage = styled.div`
   min-height: 300px;
@@ -17,7 +16,7 @@ const HeaderImage = styled.div`
       no-repeat center/cover;
 `;
 
-export const HeaderCover = () => {
+const HeaderCover = () => {
   return (
     <HeaderImage>
       <Container>
@@ -31,3 +30,5 @@ export const HeaderCover = () => {
     </HeaderImage>
   );
 };
+
+export default HeaderCover;

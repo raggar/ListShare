@@ -7,10 +7,10 @@ import app.backend.errors.LoginException
 import app.backend.errors.RegistrationException
 import app.backend.models.DbUser
 import app.backend.services.UserService
-import app.backend.utils.cleanEmail
-import app.backend.utils.cleanName
-import app.backend.utils.cleanPassword
-import app.backend.utils.isEmailValid
+import app.backend.util.cleanEmail
+import app.backend.util.cleanName
+import app.backend.util.cleanPassword
+import app.backend.util.isEmailValid
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.http.ResponseEntity

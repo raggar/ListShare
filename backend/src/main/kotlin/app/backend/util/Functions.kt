@@ -1,4 +1,4 @@
-package app.backend.utils
+package app.backend.util
 
 import app.backend.JWT_SECRET
 import app.backend.errors.UnauthenticatedException

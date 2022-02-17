@@ -2,12 +2,9 @@ import React from "react";
 import Button from "../base/Button";
 import styled from "styled-components";
 import styles from "../../styles/styles";
-import DropCircle from "../base/DropCircle";
+import { DropCircle, NavTopItem, Spacer, NewButton } from "../";
 import { MdBookmark, MdHomeFilled, MdSearch } from "react-icons/md";
-import NavTopItem from "./NavTopItem";
-import Spacer from "../base/Spacer";
-import { ICategory } from "../../data/ICategory";
-import NewButton from "../base/Button/NewButton";
+import { ICategory } from "../../interfaces";
 
 interface SideNavProps {
   isLoggedIn?: boolean;
@@ -85,61 +82,61 @@ const ButtonWrapper = styled.div`
   position: absolute;
 `;
 
-const SideNav = (props: SideNavProps) => {
-  const categories: ICategory[] = [
-    {
-      category_name: "desk setup",
-      category_lists: [
-        {
-          list_name: "hello",
-          list_items: [],
-        },
-        {
-          list_name: "hello",
-          list_items: [],
-        },
-        {
-          list_name: "hello",
-          list_items: [],
-        },
-      ],
-    },
-    {
-      category_name: "christmas",
-      category_lists: [
-        {
-          list_name: "hello",
-          list_items: [],
-        },
-        {
-          list_name: "hello",
-          list_items: [],
-        },
-        {
-          list_name: "hello",
-          list_items: [],
-        },
-      ],
-    },
-    {
-      category_name: "skincare",
-      category_lists: [
-        {
-          list_name: "hello",
-          list_items: [],
-        },
-        {
-          list_name: "hello",
-          list_items: [],
-        },
-        {
-          list_name: "hello",
-          list_items: [],
-        },
-      ],
-    },
-  ];
+const categories: ICategory[] = [
+  {
+    category_name: "desk setup",
+    category_lists: [
+      {
+        list_name: "hello",
+        list_items: [],
+      },
+      {
+        list_name: "hello",
+        list_items: [],
+      },
+      {
+        list_name: "hello",
+        list_items: [],
+      },
+    ],
+  },
+  {
+    category_name: "christmas",
+    category_lists: [
+      {
+        list_name: "hello",
+        list_items: [],
+      },
+      {
+        list_name: "hello",
+        list_items: [],
+      },
+      {
+        list_name: "hello",
+        list_items: [],
+      },
+    ],
+  },
+  {
+    category_name: "skincare",
+    category_lists: [
+      {
+        list_name: "hello",
+        list_items: [],
+      },
+      {
+        list_name: "hello",
+        list_items: [],
+      },
+      {
+        list_name: "hello",
+        list_items: [],
+      },
+    ],
+  },
+];
 
+const SideNav = (props: SideNavProps) => {
   return (
     <StyledContainer>
       <TopWrapper>

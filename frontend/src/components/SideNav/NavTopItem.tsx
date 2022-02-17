@@ -4,8 +4,7 @@ import { Icon } from "react-feather";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import styles from "../../styles/styles";
-import { ReactIcon } from "../base/ReactIcon";
-import Spacer from "../base/Spacer";
+import { ReactIcon, Spacer } from "../";
 
 export interface NavTopItemProps extends ComponentPropsWithoutRef<"button"> {
   icon: Icon;
@@ -24,7 +23,7 @@ const StyledStack = styled(Stack).attrs({ direction: "horizontal" })`
 
 const NavTopItem = (props: NavTopItemProps) => {
   return (
-    <Link to={props.link} style={{ textDecoration: 'none' }}>
+    <Link to={props.link} style={{ textDecoration: "none" }}>
       <StyledStack className="align-items-center">
         {ReactIcon(props.icon, 22)}
         <Spacer width={32} />

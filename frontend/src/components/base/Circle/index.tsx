@@ -1,6 +1,5 @@
 import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
-import { ReactIcon } from "../ReactIcon";
 
 type Props = ComponentPropsWithoutRef<"div">;
 

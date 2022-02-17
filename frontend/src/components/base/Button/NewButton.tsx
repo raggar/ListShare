@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { MdAdd } from "react-icons/md";
 import styles from "../../../styles/styles";
-import { ReactIcon } from "../ReactIcon";
 import Circle from "../Circle";
+import ReactIcon from "../ReactIcon";
 
 const StyledCircle = styled(Circle).attrs({ size: 48 })`
   z-index: 999;

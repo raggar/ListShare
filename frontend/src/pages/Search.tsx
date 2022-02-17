@@ -1,13 +1,11 @@
 import React from "react";
-import PageWrapper from "./PageWrapper";
-import { PageContent } from "./styled";
+import PageWrapper from "../components/PageWrapper";
+import { PageContent } from "../styles/page-content";
 
-function Search() {
-  return (
-    <PageWrapper>
-      <PageContent>search</PageContent>
-    </PageWrapper>
-  );
-}
+const Search: React.FC = () => (
+  <PageWrapper>
+    <PageContent>search</PageContent>
+  </PageWrapper>
+);
 
 export default Search;
