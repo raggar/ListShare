@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest
 class ListController(private val listService: ListService) {
   @GetMapping("/all")
   fun getAllLists(request: HttpServletRequest): ResponseEntity<List<DbList>> {
-    decodeJwt(request)
+//    decodeJwt(request)
     return ResponseEntity.ok(listService.findAll())
   }
 

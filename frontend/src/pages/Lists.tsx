@@ -9,6 +9,7 @@ import {
   ProductTile,
   PageWrapper,
 } from "../components/";
+import { useLists } from "../api/Lists";
 
 import { PageContent } from "../styles/page-content";
 import styles from "../styles/styles";
@@ -35,85 +36,88 @@ const Title = styled(Stack)`
   }
 `;
 
-const Lists: React.FC = () => (
-  <PageWrapper>
-    <HeaderCover />
-    <PageContent>
-      <Container>
-        <Title direction="horizontal" onClick={() => {}}>
-          <NewButton />
-          <Spacer width={styles.spacing[3]} />
-          <Typography>add new item...</Typography>
-        </Title>
-        <Spacer height={styles.spacing[4]} />
-        <LayoutContainer>
-          <ProductTile
-            title="hello"
-            comments="my favourite thing ever"
-            image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
-            link=""
-            background="inherit"
-          />
-          <ProductTile
-            title="hello"
-            comments="my favourite thing ever"
-            image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
-            link=""
-            background="inherit"
-          />
-          <ProductTile
-            title="hello"
-            comments="my favourite thing ever"
-            image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
-            link=""
-            background="inherit"
-          />
-          <ProductTile
-            title="hello"
-            comments="my favourite thing ever"
-            image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
-            link=""
-            background="inherit"
-          />
-          <ProductTile
-            title="hello"
-            comments="my favourite thing ever"
-            image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
-            link=""
-            background="inherit"
-          />
-          <ProductTile
-            title="hello"
-            comments="my favourite thing ever"
-            image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
-            link=""
-            background="inherit"
-          />
-          <ProductTile
-            title="hello"
-            comments="my favourite thing ever"
-            image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
-            link=""
-            background="inherit"
-          />
-          <ProductTile
-            title="hello"
-            comments="my favourite thing ever"
-            image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
-            link=""
-            background="inherit"
-          />
-          <ProductTile
-            title="hello"
-            comments="my favourite thing ever"
-            image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
-            link=""
-            background="inherit"
-          />
-        </LayoutContainer>
-      </Container>
-    </PageContent>
-  </PageWrapper>
-);
+const Lists: React.FC = () => {
+  const { data } = useLists();
+  return (
+    <PageWrapper>
+      <HeaderCover />
+      <PageContent>
+        <Container>
+          <Title direction="horizontal" onClick={() => {}}>
+            <NewButton />
+            <Spacer width={styles.spacing[3]} />
+            <Typography>add new item...</Typography>
+          </Title>
+          <Spacer height={styles.spacing[4]} />
+          <LayoutContainer>
+            <ProductTile
+              title="hello"
+              comments="my favourite thing ever"
+              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              link=""
+              background="inherit"
+            />
+            <ProductTile
+              title="hello"
+              comments="my favourite thing ever"
+              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              link=""
+              background="inherit"
+            />
+            <ProductTile
+              title="hello"
+              comments="my favourite thing ever"
+              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              link=""
+              background="inherit"
+            />
+            <ProductTile
+              title="hello"
+              comments="my favourite thing ever"
+              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              link=""
+              background="inherit"
+            />
+            <ProductTile
+              title="hello"
+              comments="my favourite thing ever"
+              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              link=""
+              background="inherit"
+            />
+            <ProductTile
+              title="hello"
+              comments="my favourite thing ever"
+              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              link=""
+              background="inherit"
+            />
+            <ProductTile
+              title="hello"
+              comments="my favourite thing ever"
+              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              link=""
+              background="inherit"
+            />
+            <ProductTile
+              title="hello"
+              comments="my favourite thing ever"
+              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              link=""
+              background="inherit"
+            />
+            <ProductTile
+              title="hello"
+              comments="my favourite thing ever"
+              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              link=""
+              background="inherit"
+            />
+          </LayoutContainer>
+        </Container>
+      </PageContent>
+    </PageWrapper>
+  );
+};
 
 export default Lists;
