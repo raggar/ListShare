@@ -1,8 +1,8 @@
 import React from "react";
 import { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
-import SideNav from "../components/SideNav";
-import styles from "../styles/styles";
+import { SideNav } from "../";
+import styles from "../../styles/styles";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -17,13 +17,11 @@ const Page = styled.div`
   flex: 1 1 auto;
 `;
 
-function PageWrapper(props: ComponentPropsWithoutRef<"div">) {
-  return (
-    <Wrapper>
-      <SideNav />
-      <Page>{props.children}</Page>
-    </Wrapper>
-  );
-}
+const PageWrapper: React.FC = (props: ComponentPropsWithoutRef<"div">) => (
+  <Wrapper>
+    <SideNav />
+    <Page>{props.children}</Page>
+  </Wrapper>
+);
 
 export default PageWrapper;

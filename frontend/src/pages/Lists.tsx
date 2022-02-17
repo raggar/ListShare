@@ -1,14 +1,17 @@
 import React from "react";
 import { Container, Stack } from "react-bootstrap";
 import styled from "styled-components";
-import NewButton from "../components/base/Button/NewButton";
-import Spacer from "../components/base/Spacer";
-import Typography from "../components/base/Typography";
-import { HeaderCover } from "../components/HeaderCover";
-import ProductTile from "../components/ProductTile";
+import {
+  NewButton,
+  Spacer,
+  Typography,
+  HeaderCover,
+  ProductTile,
+  PageWrapper,
+} from "../components/";
+
+import { PageContent } from "../styles/page-content";
 import styles from "../styles/styles";
-import PageWrapper from "./PageWrapper";
-import { PageContent } from "./styled";
 
 const LayoutContainer = styled.div`
   // display: grid;

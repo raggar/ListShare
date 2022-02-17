@@ -1,6 +1,6 @@
 import React from "react";
-import PageWrapper from "./PageWrapper";
-import { PageContent } from "./styled";
+import { PageWrapper } from "../components";
+import { PageContent } from "../styles/page-content";
 
 const Home: React.FC = () => (
   <PageWrapper>

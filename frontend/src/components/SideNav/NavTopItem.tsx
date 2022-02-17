@@ -4,8 +4,7 @@ import { Icon } from "react-feather";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import styles from "../../styles/styles";
-import { ReactIcon } from "../base/ReactIcon";
-import Spacer from "../base/Spacer";
+import { ReactIcon, Spacer } from "../";
 
 export interface NavTopItemProps extends ComponentPropsWithoutRef<"button"> {
   icon: Icon;

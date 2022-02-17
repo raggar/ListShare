@@ -35,7 +35,7 @@ function Typography(props: TypographyProps) {
     case "body":
       return <Body {...props}>{props.children}</Body>;
     default:
-      return <span>{props.children}</span>
+      return <span>{props.children}</span>;
   }
 }
 

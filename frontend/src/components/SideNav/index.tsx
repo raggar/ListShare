@@ -2,12 +2,9 @@ import React from "react";
 import Button from "../base/Button";
 import styled from "styled-components";
 import styles from "../../styles/styles";
-import DropCircle from "../base/DropCircle";
+import { DropCircle, NavTopItem, Spacer, NewButton } from "../";
 import { MdBookmark, MdHomeFilled, MdSearch } from "react-icons/md";
-import NavTopItem from "./NavTopItem";
-import Spacer from "../base/Spacer";
-import { ICategory } from "../../data/ICategory";
-import NewButton from "../base/Button/NewButton";
+import { ICategory } from "../../interfaces";
 
 interface SideNavProps {
   isLoggedIn?: boolean;

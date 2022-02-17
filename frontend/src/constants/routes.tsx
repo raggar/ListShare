@@ -1,6 +1,5 @@
 export enum BaseRoute {
   HOME = "/",
-  SEARCH = "/",
-  LISTS = "/",
-  PROFILE = "/",
+  SEARCH = "/search",
+  LISTS = "/lists",
 }

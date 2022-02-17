@@ -1,8 +1,7 @@
 import React, { ComponentPropsWithoutRef, useState } from "react";
 import styled from "styled-components";
 import styles from "../../styles/styles";
-import DropCircle from "../base/DropCircle";
-import Typography from "../base/Typography";
+import { DropCircle, Typography } from "../";
 
 type Props = ComponentPropsWithoutRef<"div">;
 
