@@ -18,11 +18,10 @@ const AppRoutes: React.FC = () => (
 
 const App: React.FC = () => (
   <>
-    <p>Hello</p>
-    {/* <GlobalStyle /> */}
-    {/* <UserContextProvider> */}
-    {/*   <AppRoutes /> */}
-    {/* </UserContextProvider> */}
+    <GlobalStyle />
+    <UserContextProvider>
+      <AppRoutes />
+    </UserContextProvider>
   </>
 );
 
