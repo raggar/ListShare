@@ -1,5 +1,11 @@
 name: Check the source code
-on: push
+on:
+  push:
+    branches:
+      - master
+  pull-request:
+    branches:
+      - master
 jobs:
   test:
     name: Check the source code
@@ -12,6 +18,6 @@ jobs:
       - name: Install packages
         run: npm ci
       - name: Prettier
-        run: npm run format
-      - name: Lint
-        run: npm run lint
+        run: prettier --write .
+      # - name: Lint
+      #   run: npm run lint
