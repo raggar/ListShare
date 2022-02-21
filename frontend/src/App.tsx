@@ -20,6 +20,7 @@ const AppRoutes: React.FC = () => (
 
 function App() {
   const { user } = useContext(AuthContext);
+  const stuff = "test";
   return user != null ? (
     <QueryClientProvider client={queryCache}>
       <GlobalStyle />
