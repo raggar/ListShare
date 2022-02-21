@@ -10,18 +10,16 @@ const initialState: InitialStateInterface = {
   user: null,
 };
 
-if (localStorage.getItem("jwtToken")) {
-  const storedToken = localStorage.getItem("jwtToken");
-  if (storedToken != null) {
-    const decodedToken = jwtDecode<JwtPayload>(storedToken);
+const storedToken = localStorage.getItem("token");
+if (storedToken != null) {
+  const decodedToken = jwtDecode<JwtPayload>(storedToken);
 
-    // if (decodedToken?.exp * 1000 < Date.now()) {
-    //   localStorage.removeItem("jwtToken");
-    //   initialState.user = null;
-    // } else {
-    //   initialState.user = decodedToken;
-    // }
-  }
+  // if (decodedToken?.exp * 1000 < Date.now()) {
+  //   localStorage.removeItem("jwtToken");
+  //   initialState.user = null;
+  // } else {
+  //   initialState.user = decodedToken;
+  // }
 }
 
 const AuthContext = createContext({
@@ -54,7 +52,7 @@ function AuthProvider({ children }) {
 
   // defining login and logout functions on user given back from context
   function login(userData) {
-    localStorage.setItem("jwtToken", userData.token);
+    localStorage.setItem("token", userData.token);
     dispatch({
       type: "LOGIN",
       payload: userData,

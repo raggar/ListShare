@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, Search, Lists } from "./pages";
-import { AuthProvider } from "./contexts/AuthContextProvider";
+import { AuthProvider, AuthContext } from "./contexts/AuthContextProvider";
 import GlobalStyle from "./styles/global";
 import "bootstrap/dist/css/bootstrap.css";
 import { BaseRoute } from "./constants/routes";
@@ -18,13 +18,18 @@ const AppRoutes: React.FC = () => (
   </BrowserRouter>
 );
 
-const App: React.FC = () => (
-  <QueryClientProvider client={queryCache}>
-    <GlobalStyle />
-    <AuthProvider>
-      <AppRoutes />
-    </AuthProvider>
-  </QueryClientProvider>
-);
+function App() {
+  const { user } = useContext(AuthContext);
+  return user != null ? (
+    <QueryClientProvider client={queryCache}>
+      <GlobalStyle />
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </QueryClientProvider>
+  ) : (
+    <h1>You are not authorized to view this application.</h1>
+  );
+}
 
 export default App;

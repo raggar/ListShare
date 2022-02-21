@@ -4,7 +4,7 @@ import { useQuery, QueryClient } from "react-query";
 const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
   headers: {
-    token: "random token I guess..",
+    token: localStorage.getItem("token") ?? "",
   },
 });
 
