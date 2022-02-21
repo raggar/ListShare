@@ -1,11 +1,5 @@
 name: Check the source code
-on:
-  push:
-    branches:
-      - master
-  pull-request:
-    branches:
-      - master
+on: push
 jobs:
   test:
     name: Check the source code
