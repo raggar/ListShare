@@ -1,6 +1,7 @@
 package app.backend.controller
 
 import app.backend.JWT_SECRET
+import app.backend.dtos.AuthUserDTO
 import app.backend.dtos.LoginDTO
 import app.backend.dtos.RegisterDTO
 import app.backend.errors.LoginException
@@ -46,12 +47,12 @@ class AuthController(private val userService: UserService) {
   }
 
   @PostMapping("/login")
-  fun login(request: HttpServletRequest, @RequestBody body: LoginDTO): ResponseEntity<DbUser> {
+  fun login(request: HttpServletRequest, @RequestBody body: LoginDTO): ResponseEntity<AuthUserDTO> {
     val email = cleanEmail(body.email)
     val password = cleanPassword(body.password)
 
-    val user = userService.findByEmail(email)
-        ?: throw LoginException("Email not found!")
+    val user = (userService.findByEmail(email)
+        ?: throw LoginException("Email not found!")) as AuthUserDTO
 
     if (!user.comparePassword(password)) {
       throw LoginException("Invalid password!")
@@ -65,7 +66,7 @@ class AuthController(private val userService: UserService) {
         .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
         .compact()
 
-    request.session.setAttribute("token", jwt)
+    user.token = jwt
 
     return ResponseEntity.ok(user)
   }

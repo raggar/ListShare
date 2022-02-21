@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Stack } from "react-bootstrap";
 import styled from "styled-components";
 import {
@@ -9,7 +9,6 @@ import {
   ProductTile,
   PageWrapper,
 } from "../components/";
-import { useLists } from "../api/Lists";
 
 import { PageContent } from "../styles/page-content";
 import styles from "../styles/styles";
@@ -37,7 +36,6 @@ const Title = styled(Stack)`
 `;
 
 const Lists: React.FC = () => {
-  const { data } = useLists();
   return (
     <PageWrapper>
       <HeaderCover />

@@ -14,6 +14,6 @@ fun cleanEmail(email: String) = email.trim().lowercase()
 fun cleanPassword(password: String) = password.trim()
 
 fun decodeJwt(request: HttpServletRequest): Claims {
-  val jwt = request.session.getAttribute("token") ?: throw UnauthenticatedException("Missing Jwt")
+  val jwt = request.getHeader("token") ?: throw UnauthenticatedException("Missing Jwt")
   return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(jwt as String).body
 }

@@ -1,10 +1,12 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, Search, Lists } from "./pages";
-import { UserContextProvider } from "./contexts/UserContext";
+import { AuthProvider } from "./contexts/AuthContextProvider";
 import GlobalStyle from "./styles/global";
 import "bootstrap/dist/css/bootstrap.css";
 import { BaseRoute } from "./constants/routes";
+import { QueryClientProvider } from "react-query";
+import { queryCache } from "./api";
 
 const AppRoutes: React.FC = () => (
   <BrowserRouter>
@@ -17,12 +19,12 @@ const AppRoutes: React.FC = () => (
 );
 
 const App: React.FC = () => (
-  <>
+  <QueryClientProvider client={queryCache}>
     <GlobalStyle />
-    <UserContextProvider>
+    <AuthProvider>
       <AppRoutes />
-    </UserContextProvider>
-  </>
+    </AuthProvider>
+  </QueryClientProvider>
 );
 
 export default App;
