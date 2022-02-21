@@ -13,7 +13,6 @@ const initialState: InitialStateInterface = {
 const storedToken = localStorage.getItem("token");
 if (storedToken != null) {
   const decodedToken = jwtDecode<JwtPayload>(storedToken);
-
   // if (decodedToken?.exp * 1000 < Date.now()) {
   //   localStorage.removeItem("jwtToken");
   //   initialState.user = null;
