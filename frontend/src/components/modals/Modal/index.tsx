@@ -5,11 +5,7 @@ import styles from "../../../styles/styles";
 
 type Props = ComponentPropsWithoutRef<"div">;
 
-interface ModalProps extends Props {
-  open?: boolean;
-  size?: number;
-  background?: string;
-  icon?: JSX.Element;
+export interface ModalProps extends Props {
   show: boolean;
   setShow: (show: boolean) => void;
 }
