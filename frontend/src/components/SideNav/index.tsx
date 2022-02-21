@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../base/Button";
 import styled from "styled-components";
 import styles from "../../styles/styles";
 import { DropCircle, NavTopItem, Spacer, NewButton } from "../";
 import { MdBookmark, MdHomeFilled, MdSearch } from "react-icons/md";
 import { ICategory } from "../../interfaces";
+import Modal from "../base/Modal";
 
 interface SideNavProps {
   isLoggedIn?: boolean;
@@ -137,15 +138,18 @@ const categories: ICategory[] = [
 ];
 
 const SideNav = (props: SideNavProps) => {
+  const [show, setShow] = useState(false);
+
   return (
     <StyledContainer>
+      <Modal show={show} setShow={setShow}></Modal>
       <TopWrapper>
         <NavTopItem name="home" icon={MdHomeFilled} link="/" />
         <Spacer height={24} />
         <NavTopItem name="search" icon={MdSearch} link="/search" />
         <Spacer height={24} />
         <NavTopItem name="your lists" icon={MdBookmark} link="/lists" />
-        <ButtonWrapper>
+        <ButtonWrapper onClick={(e) => setShow(true)}>
           <NewButton />
         </ButtonWrapper>
       </TopWrapper>
