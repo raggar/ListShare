@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { MdEdit } from "react-icons/md";
 import { Modal } from "..";
@@ -7,14 +7,32 @@ import Input from "../../base/Input";
 import { BottomWrapper, ModalProps } from "../Modal";
 
 function AddListModal(props: ModalProps) {
+  const [name, setName] = useState("");
+  const [comment, setComment] = useState("");
+
+  const handleSubmit = async () => {
+    // todo: validate
+    // do something with name, comment
+  };
+
   return (
     <Modal {...props}>
       <Typography variant="h5">new list</Typography>
       <Spacer height={24} />
-      <Form>
-        <Input icon={ReactIcon(MdEdit, 18)} placeholder="list name" />
+      <Form onSubmit={handleSubmit}>
+        <Input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          icon={ReactIcon(MdEdit, 18)}
+          placeholder="list name"
+        />
         <Spacer height={8} />
-        <Input area placeholder="comments" />
+        <Input
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          area
+          placeholder="comments"
+        />
         <Spacer height={24} />
         <BottomWrapper>
           <Button primary type="submit">

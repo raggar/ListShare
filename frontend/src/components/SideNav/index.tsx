@@ -28,7 +28,6 @@ const StyledContainer = styled.div<SideNavProps>`
 
 const BottomWrapper = styled.div`
   background-color: ${styles.colors.white};
-  padding: ${styles.spacing[5]};
   width: 100%;
   z-index: 10;
   flex: 0 1 auto;
