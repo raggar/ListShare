@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useQuery, QueryClient } from "react-query";
+import { QueryClient } from "react-query";
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
