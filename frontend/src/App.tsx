@@ -20,24 +20,16 @@ const AppRoutes: React.FC = () => (
 
 function App() {
   const { user } = useContext(AuthContext);
-  return (
+  return user != null ? (
     <QueryClientProvider client={queryCache}>
       <GlobalStyle />
       <AuthProvider>
         <AppRoutes />
       </AuthProvider>
     </QueryClientProvider>
+  ) : (
+    <h1>You are not authorized to view this application.</h1>
   );
-  // return user != null ? (
-  //   <QueryClientProvider client={queryCache}>
-  //     <GlobalStyle />
-  //     <AuthProvider>
-  //       <AppRoutes />
-  //     </AuthProvider>
-  //   </QueryClientProvider>
-  // ) : (
-  //   <h1>You are not authorized to view this application.</h1>
-  // );
 }
 
 export default App;
