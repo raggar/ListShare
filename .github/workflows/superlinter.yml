@@ -16,7 +16,7 @@ jobs:
     env:
       VALIDATE_TYPESCRIPT_STANDARD: false
       VALIDATE_TYPESCRIPT_ES: true
-      TYPESCRIPT_ES_CONFIG_FILE: frontend/.eslintrc.json
+      TYPESCRIPT_ES_CONFIG_FILE: frontend/.eslintrc.js
 
     steps:
       - name: Checkout code
