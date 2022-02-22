@@ -1,25 +1,21 @@
 import React from "react";
-import { Form, FormControl, InputGroup } from "react-bootstrap";
-import styled from "styled-components";
+import { Form } from "react-bootstrap";
+import { MdEdit } from "react-icons/md";
 import { Modal } from "..";
-import { Button, Typography } from "../../base";
+import { Button, ReactIcon, Spacer, Typography } from "../../base";
+import Input from "../../base/Input";
 import { ModalProps } from "../Modal";
 
 function AddListModal(props: ModalProps) {
   return (
     <Modal {...props}>
       <Typography variant="h5">new list</Typography>
+      <Spacer height={24} />
       <Form>
-        <Form.Group className="mb-3" controlId="formName">
-          <FormControl placeholder="list name" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formComments">
-          <FormControl
-            placeholder="comments"
-            as="textarea"
-            aria-label="comments"
-          />
-        </Form.Group>
+        <Input icon={ReactIcon(MdEdit, 22)} placeholder="list name" />
+        <Spacer height={8} />
+        <Input area placeholder="comments" />
+        <Spacer height={24} />
         <Button primary type="submit">
           save
         </Button>
