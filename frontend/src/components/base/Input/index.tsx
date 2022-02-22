@@ -16,7 +16,6 @@ const StyledInput = styled.input<InputProps>`
   padding: 0.375rem 0.75rem;
   padding-left: ${({ icon }) => (icon ? styles.spacing[5] : null)};
   font-size: 1rem;
-  font-weight: 400;
   line-height: 1.5;
   background-clip: padding-box;
   border: 0.5px solid ${styles.colors.text.secondary};
@@ -32,7 +31,6 @@ const StyledTextArea = styled.textarea<TextAreaProps>`
   width: 100%;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
-  font-weight: 400;
   line-height: 1.5;
   background-clip: padding-box;
   border: 0.5px solid ${styles.colors.text.secondary};

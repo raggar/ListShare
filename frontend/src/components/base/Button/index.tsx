@@ -17,6 +17,7 @@ const StyledButton = styled.button<ButtonProps>`
   outline: none;
   padding: 12px;
   min-width: 150px;
+  width: auto;
 
   &:hover {
     background-color: ${({ primary }) =>

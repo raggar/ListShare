@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef, useState } from "react";
 import styled from "styled-components";
-import { CloseButton, Modal as ReactModal } from "react-bootstrap";
+import { Modal as ReactModal, Row } from "react-bootstrap";
 import styles from "../../../styles/styles";
 import { ReactIcon } from "../../base";
 import { MdClose } from "react-icons/md";
@@ -46,3 +46,8 @@ function Modal(props: ModalProps) {
 }
 
 export default Modal;
+
+export const BottomWrapper = styled(Row)`
+  justify-content: flex-end;
+  margin: ${styles.spacing[0]};
+`;

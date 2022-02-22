@@ -5,3 +5,4 @@ export { default as DropCircle } from "./DropCircle";
 export { default as ReactIcon } from "./ReactIcon";
 export { default as Spacer } from "./Spacer";
 export { default as Typography } from "./Typography";
+export { default as Input} from "./Input";

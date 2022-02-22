@@ -1,9 +1,9 @@
 import React from "react";
-import { Form, FormControl, InputGroup } from "react-bootstrap";
-import styled from "styled-components";
+import { Form } from "react-bootstrap";
+import { MdEdit, MdLink } from "react-icons/md";
 import { Modal } from "..";
-import { Button, Typography } from "../../base";
-import { ModalProps } from "../Modal";
+import { Button, Input, ReactIcon, Spacer, Typography } from "../../base";
+import { BottomWrapper, ModalProps } from "../Modal";
 
 interface AddItemModalProps extends ModalProps {
   listName?: string;
@@ -16,22 +16,19 @@ function AddItemModal(props: AddItemModalProps) {
         add item
         {props.listName ? `to &quot;${props.listName}&quot;` : ""}
       </Typography>
+      <Spacer height={24} />
       <Form>
-        <Form.Group className="mb-3" controlId="formUrl">
-          <FormControl placeholder="product link" aria-label="product link" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formName">
-          <FormControl placeholder="product name" aria-label="product name" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formPrice">
-          <FormControl placeholder="price" aria-label="price" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formComments">
-          <FormControl placeholder="comments" as="textarea" aria-label="comments" />
-        </Form.Group>
-        <Button primary type="submit">
-          save
-        </Button>
+        <Input icon={ReactIcon(MdLink, 18)} placeholder="product url" />
+        <Spacer height={8} />
+        <Input icon={ReactIcon(MdEdit, 18)} placeholder="product name" />
+        <Spacer height={8} />
+        <Input area placeholder="comments" />
+        <Spacer height={24} />
+        <BottomWrapper>
+          <Button primary type="submit">
+            save
+          </Button>
+        </BottomWrapper>
       </Form>
     </Modal>
   );
