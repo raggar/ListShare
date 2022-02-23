@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../base/Button";
 import styled from "styled-components";
 import styles from "../../styles/styles";
 import { DropCircle, NavTopItem, Spacer, NewButton } from "../";
 import { MdBookmark, MdHomeFilled, MdSearch } from "react-icons/md";
 import { ICategory } from "../../interfaces";
+import { AddListModal, RegisterModal } from "../modals";
 
 interface SideNavProps {
   isLoggedIn?: boolean;
@@ -27,7 +28,6 @@ const StyledContainer = styled.div<SideNavProps>`
 
 const BottomWrapper = styled.div`
   background-color: ${styles.colors.white};
-  padding: ${styles.spacing[5]};
   width: 100%;
   z-index: 10;
   flex: 0 1 auto;
@@ -137,15 +137,20 @@ const categories: ICategory[] = [
 ];
 
 const SideNav = (props: SideNavProps) => {
+  const [show, setShow] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+
   return (
     <StyledContainer>
+      <AddListModal show={show} setShow={setShow} />
+      <RegisterModal show={showRegister} setShow={setShowRegister} />
       <TopWrapper>
         <NavTopItem name="home" icon={MdHomeFilled} link="/" />
         <Spacer height={24} />
         <NavTopItem name="search" icon={MdSearch} link="/search" />
         <Spacer height={24} />
         <NavTopItem name="your lists" icon={MdBookmark} link="/lists" />
-        <ButtonWrapper>
+        <ButtonWrapper onClick={(e) => setShow(true)}>
           <NewButton />
         </ButtonWrapper>
       </TopWrapper>
@@ -180,8 +185,12 @@ const SideNav = (props: SideNavProps) => {
             your profile
           </Button>
         ) : (
-          <Button primary className="w-100">
-            login
+          <Button
+            primary
+            className="w-100"
+            onClick={(e) => setShowRegister(true)}
+          >
+            login or register
           </Button>
         )}
       </BottomWrapper>

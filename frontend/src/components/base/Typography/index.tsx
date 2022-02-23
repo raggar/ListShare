@@ -20,6 +20,12 @@ const H3 = styled.span<TypographyProps>`
   font-weight: 600;
 `;
 
+const H5 = styled.span<TypographyProps>`
+  font-size: ${({ size }) => size ?? "24px"};
+  color: ${({ color }) => color ?? styles.colors.text.dark}};
+  font-weight: 600;
+`;
+
 const Body = styled.span<TypographyProps>`
   font-size: ${({ size }) => size ?? "18px"};
   color: ${({ color }) => color ?? styles.colors.text.dark}};
@@ -32,6 +38,8 @@ function Typography(props: TypographyProps) {
       return <H1 {...props}>{props.children}</H1>;
     case "h3":
       return <H3 {...props}>{props.children}</H3>;
+    case "h5":
+      return <H5 {...props}>{props.children}</H5>;
     case "body":
       return <Body {...props}>{props.children}</Body>;
     default:

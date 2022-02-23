@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Container, Stack } from "react-bootstrap";
 import styled from "styled-components";
 import {
@@ -12,6 +12,7 @@ import {
 
 import { PageContent } from "../styles/page-content";
 import styles from "../styles/styles";
+import { AddItemModal } from "../components/modals";
 
 const LayoutContainer = styled.div`
   // display: grid;
@@ -36,12 +37,16 @@ const Title = styled(Stack)`
 `;
 
 const Lists: React.FC = () => {
+  
+  const [show, setShow] = useState(false);
+
   return (
     <PageWrapper>
+      <AddItemModal show={show} setShow={setShow} />
       <HeaderCover />
       <PageContent>
         <Container>
-          <Title direction="horizontal" onClick={() => {}}>
+          <Title direction="horizontal" onClick={() => setShow(true)}>
             <NewButton />
             <Spacer width={styles.spacing[3]} />
             <Typography>add new item...</Typography>
