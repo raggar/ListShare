@@ -1,9 +1,15 @@
+var ERROR = 2;
 module.exports = {
   env: {
     browser: true,
     es2021: true,
   },
-  extends: "plugin:react/recommended",
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
@@ -14,8 +20,8 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint"],
   rules: {
-    "no-useless-call": 2,
-    "no-unused-vars": 2,
-    quotes: [2, "double"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    quotes: [ERROR, "double"],
   },
 };

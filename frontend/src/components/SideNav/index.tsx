@@ -188,7 +188,7 @@ const SideNav = (props: SideNavProps) => {
           <Button
             primary
             className="w-100"
-            onClick={(e) => setShowRegister(true)}
+            onClick={() => setShowRegister(true)}
           >
             login or register
           </Button>
