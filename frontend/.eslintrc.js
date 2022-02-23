@@ -1,7 +1,11 @@
-var ERROR = 2;
+var OFF = 0,
+  WARN = 1,
+  ERROR = 2;
+
 module.exports = {
   env: {
     browser: true,
+    node: true,
     es2021: true,
   },
   extends: [
@@ -20,8 +24,14 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint"],
   rules: {
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"],
+    "no-unused-vars": OFF,
+    "@typescript-eslint/no-unused-vars": [ERROR],
+    "@typescript-eslint/no-empty-function": OFF,
+    "no-mixed-spaces-and-tabs": WARN,
+    "no-multiple-empty-lines": WARN,
+    "no-negated-condition": OFF,
+    "no-ternary": OFF,
+    semi: [ERROR, "always"],
     quotes: [ERROR, "double"],
   },
 };
