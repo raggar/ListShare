@@ -3,7 +3,7 @@ import styled from "styled-components";
 import styles from "../../../styles/styles";
 
 interface InputProps extends ComponentPropsWithoutRef<"input"> {
-  icon?: any;
+  icon?;
   area?: boolean;
   description?: string;
 }
