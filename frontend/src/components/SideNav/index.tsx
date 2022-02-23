@@ -5,7 +5,7 @@ import styles from "../../styles/styles";
 import { DropCircle, NavTopItem, Spacer, NewButton } from "../";
 import { MdBookmark, MdHomeFilled, MdSearch } from "react-icons/md";
 import { ICategory } from "../../interfaces";
-import { AddListModal, RegisterModal } from "../modals";
+import { AddListModal, LoginModal } from "../modals";
 
 interface SideNavProps {
   isLoggedIn?: boolean;
@@ -143,7 +143,7 @@ const SideNav = (props: SideNavProps) => {
   return (
     <StyledContainer>
       <AddListModal show={show} setShow={setShow} />
-      <RegisterModal show={showRegister} setShow={setShowRegister} />
+      <LoginModal show={showRegister} setShow={setShowRegister} />
       <TopWrapper>
         <NavTopItem name="home" icon={MdHomeFilled} link="/" />
         <Spacer height={24} />
