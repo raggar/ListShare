@@ -1,5 +1,5 @@
 import React, { useReducer, createContext } from "react";
-import jwtDecode, { JwtPayload } from "jwt-decode";
+import { JwtPayload } from "jwt-decode";
 import PropTypes from "prop-types";
 
 interface InitialStateInterface {
@@ -12,8 +12,7 @@ const initialState: InitialStateInterface = {
 
 const storedToken = localStorage.getItem("token");
 if (storedToken != null) {
-  const decodedToken = jwtDecode<JwtPayload>(storedToken);
-
+  // const decodedToken = jwtDecode<JwtPayload>(storedToken);
   // if (decodedToken?.exp * 1000 < Date.now()) {
   //   localStorage.removeItem("jwtToken");
   //   initialState.user = null;
@@ -24,7 +23,9 @@ if (storedToken != null) {
 
 const AuthContext = createContext({
   user: null,
-  login: (userData) => {},
+  login: (userData) => {
+    console.log(userData);
+  },
   logout: () => {},
 });
 
