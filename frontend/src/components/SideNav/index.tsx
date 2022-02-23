@@ -150,7 +150,7 @@ const SideNav = (props: SideNavProps) => {
         <NavTopItem name="search" icon={MdSearch} link="/search" />
         <Spacer height={24} />
         <NavTopItem name="your lists" icon={MdBookmark} link="/lists" />
-        <ButtonWrapper onClick={(e) => setShow(true)}>
+        <ButtonWrapper onClick={() => setShow(true)}>
           <NewButton />
         </ButtonWrapper>
       </TopWrapper>

@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, useState } from "react";
+import React, { ComponentPropsWithoutRef, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { Modal as ReactModal, Row } from "react-bootstrap";
 import styles from "../../../styles/styles";
@@ -9,7 +9,7 @@ type Props = ComponentPropsWithoutRef<"div">;
 
 export interface ModalProps extends Props {
   show: boolean;
-  setShow: (show: boolean) => void;
+  setShow: Dispatch<SetStateAction<boolean>>;
 }
 
 const StyledModal = styled(ReactModal)`
@@ -37,7 +37,7 @@ function Modal(props: ModalProps) {
 
   return (
     <StyledModal show={props.show} centered>
-      <CloseWrapper onClick={(e) => props.setShow(false)}>
+      <CloseWrapper onClick={() => props.setShow(false)}>
         {ReactIcon(MdClose, 24)}
       </CloseWrapper>
       <ModalContent>{props.children}</ModalContent>

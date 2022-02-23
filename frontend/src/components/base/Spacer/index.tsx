@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 
 export interface SpacerProps extends ComponentPropsWithoutRef<"div"> {

@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, useState } from "react";
+import React, { ComponentPropsWithoutRef, Dispatch, SetStateAction, useState } from "react";
 import { Row, Stack } from "react-bootstrap";
 import styled from "styled-components";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
@@ -16,7 +16,7 @@ interface DropCircleProps extends Props {
   background?: string;
   isProductDropdown?: boolean;
   onClick?: () => void;
-  setState?: (open: boolean) => void;
+  setState?: Dispatch<SetStateAction<boolean | undefined>>;
 }
 
 const Wrapper = styled.div<DropCircleProps>`
