@@ -19,6 +19,7 @@ const AppRoutes: React.FC = () => (
 );
 
 function App() {
+  const hello = "stuff";
   return (
     <QueryClientProvider client={queryCache}>
       <GlobalStyle />
