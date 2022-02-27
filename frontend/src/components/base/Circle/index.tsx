@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 
@@ -29,7 +30,13 @@ const IconWrapper = styled.div`
 function Circle(props: CircleProps) {
   return (
     <StyledCircle {...props}>
-      <IconWrapper>{props.icon}</IconWrapper>
+      <IconWrapper>
+        <motion.div
+          animate={{ rotate: props.open ? 180 : 0 }}
+        >
+          {props.icon}
+        </motion.div>
+      </IconWrapper>
     </StyledCircle>
   );
 }

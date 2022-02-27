@@ -22,7 +22,7 @@ const StyledContainer = styled.div<SideNavProps>`
   height: 100%;
   display: flex;
   flex-flow: column;
-
+  border-right: 0.5px solid ${styles.colors.grey};
   flex: 1 0 auto;
 `;
 

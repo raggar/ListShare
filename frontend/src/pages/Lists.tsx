@@ -37,7 +37,6 @@ const Title = styled(Stack)`
 `;
 
 const Lists: React.FC = () => {
-  
   const [show, setShow] = useState(false);
 
   return (
@@ -56,63 +55,63 @@ const Lists: React.FC = () => {
             <ProductTile
               title="hello"
               comments="my favourite thing ever"
-              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              imageUrl="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
               link=""
               background="inherit"
             />
             <ProductTile
               title="hello"
               comments="my favourite thing ever"
-              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              imageUrl="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
               link=""
               background="inherit"
             />
             <ProductTile
               title="hello"
               comments="my favourite thing ever"
-              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              imageUrl="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
               link=""
               background="inherit"
             />
             <ProductTile
               title="hello"
               comments="my favourite thing ever"
-              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              imageUrl="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
               link=""
               background="inherit"
             />
             <ProductTile
               title="hello"
               comments="my favourite thing ever"
-              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              imageUrl="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
               link=""
               background="inherit"
             />
             <ProductTile
               title="hello"
               comments="my favourite thing ever"
-              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              imageUrl="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
               link=""
               background="inherit"
             />
             <ProductTile
               title="hello"
               comments="my favourite thing ever"
-              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              imageUrl="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
               link=""
               background="inherit"
             />
             <ProductTile
               title="hello"
               comments="my favourite thing ever"
-              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              imageUrl="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
               link=""
               background="inherit"
             />
             <ProductTile
               title="hello"
               comments="my favourite thing ever"
-              image_url="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
+              imageUrl="https://cdn.faire.com/fastly/ced81555a95aa0b114baa5874d5c8eb04119a37021c7389eca42fb698df23605.jpeg?dpr=2&fit=crop&format=jpg&height=400&width=320"
               link=""
               background="inherit"
             />

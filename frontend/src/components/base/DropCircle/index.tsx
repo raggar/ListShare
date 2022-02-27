@@ -1,9 +1,15 @@
-import React, { ComponentPropsWithoutRef, Dispatch, SetStateAction, useState } from "react";
+import React, {
+  ComponentPropsWithoutRef,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 import { Row, Stack } from "react-bootstrap";
 import styled from "styled-components";
-import { MdExpandLess, MdExpandMore } from "react-icons/md";
+import { MdExpandMore } from "react-icons/md";
 import styles from "../../../styles/styles";
 import { Circle, ReactIcon } from "../";
+import { motion } from "framer-motion";
 
 type Props = ComponentPropsWithoutRef<"div">;
 
@@ -33,7 +39,7 @@ const Wrapper = styled.div<DropCircleProps>`
 const TopWrapper = styled.div`
   border-left: 0.5px solid ${styles.colors.dark};
   margin-left: -${styles.spacing[3]};
-  height: ${styles.spacing[3]};
+  height: ${styles.spacing[2]};
 `;
 
 const Title = styled(Stack)`
@@ -52,7 +58,7 @@ const StyledCircle = styled(Circle)`
 
 const Details = styled.div`
   color: ${styles.colors.text.secondary};
-  transition: max-height 0.7s, opacity 3s, visibility 4s ease;
+  overflow: hidden;
 `;
 
 const DropTitle = styled.span`
@@ -77,18 +83,19 @@ const DropCircle: React.FC<DropCircleProps> = (props: DropCircleProps) => {
             }}
           >
             <StyledCircle
-              icon={
-                isOpen
-                  ? ReactIcon(MdExpandLess, 22)
-                  : ReactIcon(MdExpandMore, 22)
-              }
+              icon={ReactIcon(MdExpandMore, 22)}
+              open={isOpen}
               background={props.background}
             />
             <DropTitle className="my-auto ms-3">{props.title}</DropTitle>
           </Title>
         </Row>
         <Row>
-          {isOpen ? <Details className="ms-3">{props.children}</Details> : null}
+          {isOpen ? (
+            <motion.div initial={{ y: -24 }} animate={{ y: 0 }}>
+              <Details className="ms-3">{props.children}</Details>
+            </motion.div>
+          ) : null}
         </Row>
       </Wrapper>
     </>

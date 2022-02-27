@@ -13,7 +13,7 @@ const Page = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  background-color: ${styles.colors.background};
+  background-color: ${styles.colors.white};
   flex: 1 1 auto;
 `;
 
