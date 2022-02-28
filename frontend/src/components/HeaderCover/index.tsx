@@ -13,8 +13,7 @@ const HeaderWrapper = styled.div``;
 
 const HeaderImage = styled.div<HeaderProps>`
   position: relative;
-  min-height: 300px;
-  height: 300px;
+  min-height: 240px;
   width: 100%;
   padding: ${styles.spacing[4]};
   display: flex;
@@ -46,7 +45,9 @@ const HeaderCover = () => {
         {/* </Parallax> */}
         <HeaderImage url={url}>
           <Container>
-            <Typography variant="h1">list name</Typography>
+            <Typography variant="h4" color={styles.colors.text.light}>
+              list name
+            </Typography>
             <Spacer height={styles.spacing[1]} />
             <Typography variant="body" color={styles.colors.text.light}>
               we&apos;ve known each other for so long...your heart&apos;s been

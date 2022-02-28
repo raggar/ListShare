@@ -24,7 +24,6 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${styles.colors.white};
     color: ${styles.colors.text.dark};
     font-family: ${styles.fonts.sans};
-    font-size: ${styles.fontSizes.md};
   }
 
   #root {

@@ -1,9 +1,8 @@
 import React, { ComponentPropsWithoutRef, useState } from "react";
 import styled from "styled-components";
 import styles from "../../styles/styles";
-import { DropCircle, Typography } from "../";
 import { motion } from "framer-motion";
-import { IconButton, ReactIcon, Spacer } from "../base";
+import { IconButton, ReactIcon, Spacer, Typography, DropCircle } from "../base";
 import { MdFavorite, MdFavoriteBorder, MdMoreVert } from "react-icons/md";
 
 type Props = ComponentPropsWithoutRef<"div">;
@@ -11,12 +10,15 @@ type Props = ComponentPropsWithoutRef<"div">;
 interface ProductTileProps extends Props {
   title: string;
   comments?: string;
-  link?: string;
   price?: string;
   productUrl?: string;
   imageUrl?: string;
   open?: boolean;
   background?: string;
+}
+
+interface ProductTitleProps {
+  isOpen: boolean;
 }
 
 const Wrapper = styled.div`
@@ -54,7 +56,15 @@ const ImageTile = styled.div<ProductTileProps>`
   }
 `;
 
-// const MotionTile = motion(ImageTile, { forwardMotionProps: true });
+const ProductTitle = styled(Typography)<ProductTitleProps>`
+
+  ${({ isOpen }) =>
+    !isOpen
+      ? `white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;`
+      : null}
+`;
 
 const ProductTile: React.FC<ProductTileProps> = (props: ProductTileProps) => {
   const [isOpen, setIsOpen] = useState(props.open);
@@ -66,11 +76,11 @@ const ProductTile: React.FC<ProductTileProps> = (props: ProductTileProps) => {
         onMouseOver={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
         animate={{
-          height: isOpen ? "300px" : "150px",
+          height: isOpen ? "240px" : "120px",
           scale: isHover ? 1.03 : 1,
         }}
       >
-        <a href={props.productUrl}>
+        <a href={props.productUrl} style={{ textDecoration: "none" }}>
           <ImageTile {...props} open={isOpen}>
             <TopOptions>
               <IconButton
@@ -80,15 +90,19 @@ const ProductTile: React.FC<ProductTileProps> = (props: ProductTileProps) => {
               <Spacer width={styles.spacing[1]} />
               <IconButton icon={ReactIcon(MdMoreVert, 24)} />
             </TopOptions>
-            <Typography variant="h5" color={styles.colors.text.light}>
+            <ProductTitle
+              isOpen={isOpen ?? false}
+              variant="h6"
+              color={styles.colors.text.light}
+            >
               {props.title}
-            </Typography>
+            </ProductTitle>
           </ImageTile>
         </a>
       </motion.div>
 
       <DropCircle
-        title={isOpen ? "show less" : "show more"}
+        title={isOpen ? "show less..." : props.comments}
         open={isOpen}
         background={styles.colors.white}
         setState={setIsOpen}
