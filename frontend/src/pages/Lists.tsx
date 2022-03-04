@@ -13,6 +13,7 @@ import {
 import { PageContent } from "../styles/page-content";
 import styles from "../styles/styles";
 import { AddItemModal } from "../components/modals";
+import TopBar from "../components/TopBar.tsx";
 
 // todo: fix media queries
 const LayoutContainer = styled.div`
@@ -53,6 +54,7 @@ const Lists: React.FC = () => {
   return (
     <PageWrapper>
       <AddItemModal show={show} setShow={setShow} />
+      <TopBar />
       <HeaderCover />
       <PageContent>
         <Container>

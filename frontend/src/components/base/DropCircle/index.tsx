@@ -8,7 +8,7 @@ import { Row, Stack } from "react-bootstrap";
 import styled from "styled-components";
 import { MdExpandMore } from "react-icons/md";
 import styles from "../../../styles/styles";
-import { Circle, ReactIcon } from "../";
+import { Circle, ReactIcon, Spacer, Typography } from "../";
 import { motion } from "framer-motion";
 
 type Props = ComponentPropsWithoutRef<"div">;
@@ -57,6 +57,7 @@ const StyledCircle = styled(Circle)`
 `;
 
 const Details = styled.div`
+  padding-left: ${styles.spacing[1]};
   color: ${styles.colors.text.secondary};
   overflow: hidden;
 `;
@@ -77,6 +78,7 @@ const DropCircle: React.FC<DropCircleProps> = (props: DropCircleProps) => {
         <Row>
           <Title
             direction="horizontal"
+            // todo: make this more versatile (add a link?)
             onClick={() => {
               setIsOpen(!isOpen);
               if (props.setState) props.setState(!isOpen);
@@ -87,13 +89,16 @@ const DropCircle: React.FC<DropCircleProps> = (props: DropCircleProps) => {
               open={isOpen}
               background={props.background}
             />
-            <DropTitle className="my-auto ms-3">{props.title}</DropTitle>
+            <Spacer width={styles.spacing[1]} />
+            <DropTitle className="my-auto">
+              <Typography variant="body">{props.title}</Typography>
+            </DropTitle>
           </Title>
         </Row>
         <Row>
           {isOpen ? (
             <motion.div initial={{ y: -24 }} animate={{ y: 0 }}>
-              <Details className="ms-3">{props.children}</Details>
+              <Details>{props.children}</Details>
             </motion.div>
           ) : null}
         </Row>

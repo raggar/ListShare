@@ -46,7 +46,7 @@ const HeaderCover = () => {
         <HeaderImage url={url}>
           <Container>
             <Typography variant="h4" color={styles.colors.text.light}>
-              list name
+              super cool list name
             </Typography>
             <Spacer height={styles.spacing[1]} />
             <Typography variant="body" color={styles.colors.text.light}>

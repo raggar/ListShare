@@ -3,6 +3,8 @@ const colors = {
   black: "#000000",
   grey: "#808080",
   dark: "#444444",
+  concrete: "#C4C4C4",
+  rice: "#F4F4F4",
   text: {
     dark: "#444444",
     light: "#FFFFFF",
@@ -13,8 +15,8 @@ const colors = {
 };
 
 const fonts = {
-  heading: "Inter, system-ui, sans-serif",
-  sans: "Inter, system-ui, sans-serif",
+  heading: "'Playfair Display', serif",
+  sans: "Inter, system-ui, sans-serif"
 };
 
 const spacing = {

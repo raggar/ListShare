@@ -9,44 +9,49 @@ export interface TypographyProps extends ComponentPropsWithoutRef<"span"> {
 }
 
 const H1 = styled.span<TypographyProps>`
+  font-family: ${styles.fonts.heading};
   font-size: ${({ size }) => size ?? "96px"};
-  color: ${({ color }) => color ?? styles.colors.text.light}};
+  color: ${({ color }) => color ?? "inherit"};
   font-weight: 700;
 `;
 
 const H2 = styled.span<TypographyProps>`
+  font-family: ${styles.fonts.heading};
   font-size: ${({ size }) => size ?? "60px"};
-  color: ${({ color }) => color ?? styles.colors.text.light}};
+  color: ${({ color }) => color ?? "inherit"};
   font-weight: 700;
 `;
 
 const H3 = styled.span<TypographyProps>`
+  font-family: ${styles.fonts.heading};
   font-size: ${({ size }) => size ?? "48px"};
-  color: ${({ color }) => color ?? styles.colors.text.light}};
+  color: ${({ color }) => color ?? "inherit"};
   font-weight: 700;
 `;
 
 const H4 = styled.span<TypographyProps>`
+  font-family: ${styles.fonts.heading};
   font-size: ${({ size }) => size ?? "34px"};
-  color: ${({ color }) => color ?? styles.colors.text.dark}};
+  color: ${({ color }) => color ?? "inherit"};
   font-weight: 600;
 `;
 
 const H5 = styled.span<TypographyProps>`
+  font-family: ${styles.fonts.heading};
   font-size: ${({ size }) => size ?? "24px"};
-  color: ${({ color }) => color ?? styles.colors.text.dark}};
+  color: ${({ color }) => color ?? "inherit"};
   font-weight: 600;
 `;
 
 const H6 = styled.span<TypographyProps>`
   font-size: ${({ size }) => size ?? "20px"};
-  color: ${({ color }) => color ?? styles.colors.text.dark}};
+  color: ${({ color }) => color ?? "inherit"};
   font-weight: 600;
 `;
 
 const Body = styled.span<TypographyProps>`
-  font-size: ${({ size }) => size ?? "18px"};
-  color: ${({ color }) => color ?? styles.colors.text.dark}};
+  font-size: ${({ size }) => size ?? "14px"};
+  color: ${({ color }) => color ?? "inherit"};
   font-weight: 300;
 `;
 
