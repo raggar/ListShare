@@ -8,4 +8,5 @@ export { default as ReactIcon } from "./ReactIcon";
 export { default as Spacer } from "./Spacer";
 export { default as Typography } from "./Typography";
 export { default as Input } from "./Input";
+export { default as Switch } from "./Input/Switch";
 export { default as Layout } from "./Layout";
