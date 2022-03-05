@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { MdAttachMoney, MdEdit, MdLink } from "react-icons/md";
 import { Modal } from "..";
-import { Button, Input, ReactIcon, Spacer, Typography } from "../../base";
+import { Button, Input, Spacer, Typography } from "../../base";
 import { BottomWrapper, ModalProps } from "../Modal";
 
 interface AddItemModalProps extends ModalProps {
@@ -31,21 +31,21 @@ function AddItemModal(props: AddItemModalProps) {
         <Input
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          icon={ReactIcon(MdLink, 18)}
+          icon={MdLink}
           placeholder="product url"
         />
         <Spacer height={8} />
         <Input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          icon={ReactIcon(MdEdit, 18)}
+          icon={MdEdit}
           placeholder="product name"
         />
         <Spacer height={8} />
         <Input
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          icon={ReactIcon(MdAttachMoney, 18)}
+          icon={MdAttachMoney}
           placeholder="price"
         />
         <Spacer height={8} />

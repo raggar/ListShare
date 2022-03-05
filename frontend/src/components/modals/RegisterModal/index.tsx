@@ -4,7 +4,7 @@ import { MdMail, MdPassword } from "react-icons/md";
 import styled from "styled-components";
 import { Modal } from "..";
 import styles from "../../../styles/styles";
-import { Button, ReactIcon, Spacer, Typography } from "../../base";
+import { Button, Spacer, Typography } from "../../base";
 import { Input } from "../../base";
 import { BottomWrapper, ModalProps } from "../Modal";
 
@@ -55,21 +55,21 @@ function RegisterModal(props: ModalProps) {
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          icon={ReactIcon(MdMail, 18)}
+          icon={MdMail}
           placeholder="email"
         />
         <Spacer height={8} />
         <Input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          icon={ReactIcon(MdPassword, 18)}
+          icon={MdPassword}
           placeholder="password"
         />
         <Spacer height={8} />
         <Input
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          icon={ReactIcon(MdPassword, 18)}
+          icon={MdPassword}
           placeholder="re-type password"
         />
         <Spacer height={24} />

@@ -14,7 +14,7 @@ const StyledBar = styled.div<HeaderProps>`
   z-index: 999;
   height: ${styles.spacing[5]};
   border-bottom: 0.5px solid ${styles.colors.concrete};
-  padding: 0px ${styles.spacing[5]};
+  padding: 0px ${styles.spacing[4]};
   width: 100%;
   display: flex;
   flex-flow: row;
@@ -27,7 +27,7 @@ const TopBar = () => {
   return (
     <>
       <StyledBar>
-        <Container>
+        <Container style={{ margin: 0 }}>
           <Typography variant="body">list name goes here</Typography>
         </Container>
       </StyledBar>

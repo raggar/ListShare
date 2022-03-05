@@ -20,8 +20,12 @@ interface DropCircleProps extends Props {
   last?: boolean;
   first?: boolean;
   background?: string;
+
   isProductDropdown?: boolean;
-  onClick?: () => void;
+
+  specialIcon?: JSX.Element;
+  clickAction?: () => void;
+
   setState?: Dispatch<SetStateAction<boolean | undefined>>;
 }
 
@@ -62,37 +66,32 @@ const Details = styled.div`
   overflow: hidden;
 `;
 
-const DropTitle = styled.span`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
 const DropCircle: React.FC<DropCircleProps> = (props: DropCircleProps) => {
   const [isOpen, setIsOpen] = useState(props.open);
+
+  const handleClick = () => {
+    if (props.clickAction) props.clickAction();
+    else {
+      setIsOpen(!isOpen);
+      if (props.setState) props.setState(!isOpen);
+    }
+  };
 
   return (
     <>
       <Wrapper {...props}>
         {props.isProductDropdown && <TopWrapper />}
         <Row>
-          <Title
-            direction="horizontal"
-            // todo: make this more versatile (add a link?)
-            onClick={() => {
-              setIsOpen(!isOpen);
-              if (props.setState) props.setState(!isOpen);
-            }}
-          >
+          <Title direction="horizontal" onClick={handleClick}>
             <StyledCircle
-              icon={ReactIcon(MdExpandMore, 22)}
+              icon={props.specialIcon ?? ReactIcon(MdExpandMore, 22)}
               open={isOpen}
               background={props.background}
             />
             <Spacer width={styles.spacing[1]} />
-            <DropTitle className="my-auto">
-              <Typography variant="body">{props.title}</Typography>
-            </DropTitle>
+            <Typography variant="body" ellipsis={!isOpen}>
+              {props.title}
+            </Typography>
           </Title>
         </Row>
         <Row>

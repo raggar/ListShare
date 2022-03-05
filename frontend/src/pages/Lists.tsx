@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Container, Stack } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import {
-  NewButton,
+  Layout,
+  TextButton,
   Spacer,
   Typography,
   HeaderCover,
@@ -34,19 +35,19 @@ const LayoutContainer = styled.div`
   }
 `;
 
-const Title = styled(Stack)`
-  height: ${({ size }) => size ?? 36}px;
+// const Title = styled(Stack)`
+//   height: ${({ size }) => size ?? 36}px;
 
-  &:hover {
-    cursor: pointer;
-    color: ${styles.colors.text.accent};
-  }
+//   &:hover {
+//     cursor: pointer;
+//     color: ${styles.colors.text.accent};
+//   }
 
-  &:hover div {
-    background: ${styles.colors.text
-      .accent}; // might not be the best way to do this
-  }
-`;
+//   &:hover div {
+//     background: ${styles.colors.text
+//       .accent}; // might not be the best way to do this
+//   }
+// `;
 
 const Lists: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -58,11 +59,19 @@ const Lists: React.FC = () => {
       <HeaderCover />
       <PageContent>
         <Container>
-          <Title direction="horizontal" onClick={() => setShow(true)}>
-            <NewButton />
-            <Spacer width={styles.spacing[3]} />
-            <Typography>add new item...</Typography>
-          </Title>
+          <Layout style={{ alignItems: "flex-end" }}>
+            <TextButton>
+              <Typography variant="body">paste a link</Typography>
+            </TextButton>
+            <Spacer width={8} />
+            <Typography variant="body"> or </Typography>
+            <Spacer width={8} />
+            <TextButton>
+              <Typography variant="body" onClick={() => setShow(true)}>
+                add it yourself
+              </Typography>
+            </TextButton>
+          </Layout>
           <Spacer height={styles.spacing[4]} />
           <LayoutContainer>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((id) => (

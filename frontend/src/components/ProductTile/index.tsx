@@ -2,8 +2,13 @@ import React, { ComponentPropsWithoutRef, useState } from "react";
 import styled from "styled-components";
 import styles from "../../styles/styles";
 import { motion } from "framer-motion";
-import { IconButton, ReactIcon, Spacer, Typography, DropCircle } from "../base";
-import { MdEdit, MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { IconButton, TextButton, ReactIcon, Spacer, Typography, DropCircle, Layout } from "../base";
+import {
+  MdEdit,
+  MdFavorite,
+  MdFavoriteBorder,
+  MdOpenInNew,
+} from "react-icons/md";
 
 type Props = ComponentPropsWithoutRef<"div">;
 
@@ -28,14 +33,11 @@ const Wrapper = styled.div`
   margin-bottom: ${styles.spacing[4]};
 `;
 
-const TopOptions = styled.div`
+const TopOptions = styled(Layout)`
   position: absolute;
   top: 0;
   right: 0;
-  color: ${styles.colors.text.light};
   padding: ${styles.spacing[2]};
-  display: flex;
-  flex-flow: row;
   justify-content: flex-end;
 `;
 
@@ -51,12 +53,17 @@ const Overlay = styled.div`
   width: 100%;
   height: 100%;
   padding: ${styles.spacing[2]};
+  color: ${styles.colors.text.light};
   position: relative;
   display: flex;
   flex-flow: column;
   justify-content: flex-end;
   border-radius: ${styles.spacing[1]};
   background: rgba(0, 0, 0, 0.5);
+
+  a:hover {
+    opacity: 0.6;
+  }
 `;
 
 const MotionOverlay = motion(Overlay);
@@ -98,16 +105,20 @@ const ProductTile: React.FC<ProductTileProps> = (props: ProductTileProps) => {
                 selectedIcon={ReactIcon(MdFavorite, 24)}
               />
             </TopOptions>
-            <a href={props.productUrl} style={{ textDecoration: "none" }}>
-            <Typography variant="body">Visit link</Typography>
-              {/* <ProductTitle
+            <TextButton href={props.productUrl}>
+              <Layout>
+                {ReactIcon(MdOpenInNew, 24)}
+                <Spacer width={8} />
+                <Typography variant="body" ellipsis>{props.productUrl}</Typography>
+                {/* <ProductTitle
                 isOpen={isOpen ?? false}
                 variant="h6"
                 color={styles.colors.text.light}
               >
                 {props.title}
               </ProductTitle> */}
-            </a>
+              </Layout>
+            </TextButton>
           </MotionOverlay>
         </ImageTile>
       </motion.div>

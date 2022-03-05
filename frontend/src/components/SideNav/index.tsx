@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import Button from "../base/Button";
 import styled from "styled-components";
 import styles from "../../styles/styles";
-import { Circle, DropCircle, NewButton, ReactIcon, Typography } from "../";
+import { DropCircle, NewButton, ReactIcon, Typography } from "../";
 import { ICategory } from "../../interfaces";
 import { AddListModal, RegisterModal } from "../modals";
-import { Stack } from "react-bootstrap";
-import { MdFavorite, MdSettings } from "react-icons/md";
-import { IconButton, Spacer } from "../base";
+import { MdFavorite, MdSearch, MdSettings } from "react-icons/md";
+import { IconButton } from "../base";
 
 interface SideNavProps {
   isLoggedIn?: boolean;
@@ -171,24 +170,26 @@ const SideNav = (props: SideNavProps) => {
       <AddListModal show={show} setShow={setShow} />
       <RegisterModal show={showRegister} setShow={setShowRegister} />
       <TopWrapper>
-        {/* <NavTopItem name="home" icon={MdHomeFilled} link="/" />
-        <Spacer height={24} />
-        <NavTopItem name="search" icon={MdSearch} link="/search" />
-        <Spacer height={24} />
-        <NavTopItem name="your lists" icon={MdBookmark} link="/lists" /> */}
         <ButtonWrapper onClick={() => setShow(true)}>
           <NewButton />
         </ButtonWrapper>
       </TopWrapper>
       <MiddleWrapper>
-        <Stack direction="horizontal">
-          <Circle
-            icon={ReactIcon(MdFavorite, 22)}
-            background={styles.colors.white}
-          />
-          <Spacer width={styles.spacing[1]} />
-          <Typography variant="body">favourites</Typography>
-        </Stack>
+        <DropCircle
+          title="favourites"
+          background={styles.colors.white}
+          specialIcon={ReactIcon(MdFavorite, 18)}
+          // todo: add action
+          clickAction={() => {}}
+          first
+        />
+        <DropCircle
+          title="search"
+          background={styles.colors.white}
+          specialIcon={ReactIcon(MdSearch, 18)}
+          // todo: add action
+          clickAction={() => {}}
+        />
         {categories.map(
           ({ category_name, category_lists }, category_i, { length }) => {
             return (
@@ -197,7 +198,6 @@ const SideNav = (props: SideNavProps) => {
                 background={styles.colors.white}
                 key={category_i}
                 last={length - 1 == category_i}
-                first={category_i == 0}
               >
                 {category_lists
                   ? category_lists.map(({ list_name }, list_i) => {

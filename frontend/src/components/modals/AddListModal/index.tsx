@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { MdEdit } from "react-icons/md";
 import { Modal } from "..";
-import { Button, ReactIcon, Spacer, Typography } from "../../base";
+import { Button, Spacer, Typography } from "../../base";
 import Input from "../../base/Input";
 import { BottomWrapper, ModalProps } from "../Modal";
 
@@ -23,7 +23,7 @@ function AddListModal(props: ModalProps) {
         <Input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          icon={ReactIcon(MdEdit, 18)}
+          icon={MdEdit}
           placeholder="list name"
         />
         <Spacer height={8} />
