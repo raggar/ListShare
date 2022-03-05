@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef } from "react";
+import React, { ComponentPropsWithoutRef, useState } from "react";
 import styled from "styled-components";
 
 interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
@@ -27,15 +27,18 @@ const ButtonWrapper = styled.button<ButtonProps>`
   }
 `;
 
-const IconWrapper = styled.span`
-  position: absolute;
-`;
-
 const IconButton: React.FC<ButtonProps> = (props: ButtonProps) => {
+  const [isHover, setHover] = useState(false);
+
   return (
-    <ButtonWrapper {...props}>
-      <IconWrapper>{props.selectedIcon}</IconWrapper>
-      {props.selected ? props.selectedIcon : props.icon}
+    <ButtonWrapper
+      {...props}
+      onMouseOver={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      {props.selectedIcon && (props.selected || isHover)
+        ? props.selectedIcon
+        : props.icon}
     </ButtonWrapper>
   );
 };

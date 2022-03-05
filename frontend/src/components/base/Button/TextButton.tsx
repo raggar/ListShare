@@ -1,21 +1,21 @@
 import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 
-type ButtonProps = ComponentPropsWithoutRef<"a">;
+interface ButtonProps extends ComponentPropsWithoutRef<"a"> {
+  hoverColor?: string;
+}
 
 const StyledLink = styled.a<ButtonProps>`
   color: inherit;
 
   &:hover {
-    color: inherit;
+    color: ${({ hoverColor }) => hoverColor ?? "inherit"};
     cursor: pointer;
   }
 `;
 
 const TextButton: React.FC<ButtonProps> = (props: ButtonProps) => {
-  return (
-      <StyledLink {...props}>{props.children}</StyledLink>
-  );
+  return <StyledLink {...props}>{props.children}</StyledLink>;
 };
 
 export default TextButton;

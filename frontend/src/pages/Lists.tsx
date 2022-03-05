@@ -16,6 +16,7 @@ import { PageContent } from "../styles/page-content";
 import styles from "../styles/styles";
 import { AddItemModal } from "../components/modals";
 import TopBar from "../components/TopBar.tsx";
+import { MdLink } from "react-icons/md";
 
 // todo: fix media queries
 const LayoutContainer = styled.div`
@@ -36,22 +37,9 @@ const LayoutContainer = styled.div`
   }
 `;
 
-// const Title = styled(Stack)`
-//   height: ${({ size }) => size ?? 36}px;
-
-//   &:hover {
-//     cursor: pointer;
-//     color: ${styles.colors.text.accent};
-//   }
-
-//   &:hover div {
-//     background: ${styles.colors.text
-//       .accent}; // might not be the best way to do this
-//   }
-// `;
-
 const Lists: React.FC = () => {
   const [show, setShow] = useState(false);
+  const [url, setUrl] = useState("");
 
   return (
     <PageWrapper>
@@ -61,12 +49,18 @@ const Lists: React.FC = () => {
       <PageContent>
         <Container>
           <Layout>
-            <Input placeholder="paste a link" width="400px"/>
+            <Input
+              placeholder="paste a link"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              icon={MdLink}
+              width="400px"
+            />
             <Layout style={{ alignItems: "flex-end" }}>
               <Spacer width={16} />
               <Typography variant="body"> or </Typography>
               <Spacer width={4} />
-              <TextButton>
+              <TextButton hoverColor={styles.colors.text.accent}>
                 <Typography variant="body" onClick={() => setShow(true)}>
                   add custom item
                 </Typography>
