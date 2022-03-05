@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { MdAttachMoney, MdEdit, MdLink } from "react-icons/md";
 import { Modal } from "..";
 import { Button, Input, Spacer, Typography } from "../../base";
-import { BottomWrapper, ModalProps } from "../Modal";
+import { ModalProps } from "../Modal";
 
 interface AddItemModalProps extends ModalProps {
   listName?: string;
@@ -21,7 +21,14 @@ function AddItemModal(props: AddItemModalProps) {
   };
 
   return (
-    <Modal {...props}>
+    <Modal
+      {...props}
+      modalCTA={
+        <Button primary type="submit">
+          save
+        </Button>
+      }
+    >
       <Typography variant="h5">
         add item
         {props.listName ? `to &quot;${props.listName}&quot;` : ""}
@@ -55,12 +62,6 @@ function AddItemModal(props: AddItemModalProps) {
           area
           placeholder="comments"
         />
-        <Spacer height={24} />
-        <BottomWrapper>
-          <Button primary type="submit">
-            save
-          </Button>
-        </BottomWrapper>
       </Form>
     </Modal>
   );

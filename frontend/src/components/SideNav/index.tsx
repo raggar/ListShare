@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import Button from "../base/Button";
 import styled from "styled-components";
 import styles from "../../styles/styles";
 import { DropCircle, NewButton, ReactIcon, Typography } from "../";
 import { ICategory } from "../../interfaces";
 import { AddListModal, RegisterModal } from "../modals";
 import { MdFavorite, MdSearch, MdSettings } from "react-icons/md";
-import { IconButton } from "../base";
+import { IconButton, Button } from "../base";
 
 interface SideNavProps {
   isLoggedIn?: boolean;

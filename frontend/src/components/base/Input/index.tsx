@@ -13,9 +13,10 @@ interface InputProps extends ComponentPropsWithoutRef<"input"> {
 type TextAreaProps = ComponentPropsWithoutRef<"textarea">;
 
 const StyledInput = styled.input<InputProps>`
+  background: none;
   font-family: inherit;
   display: block;
-  width: 100%;
+  width: ${({ width }) => width ?? "100%"};
   padding: 0.375rem 0.75rem;
   padding-left: ${({ icon }) => (icon ? styles.spacing[4] : null)};
   font-size: 14px;
@@ -32,6 +33,7 @@ const StyledInput = styled.input<InputProps>`
 `;
 
 const StyledTextArea = styled.textarea<TextAreaProps>`
+  background: none;
   font-family: inherit;
   display: block;
   width: 100%;

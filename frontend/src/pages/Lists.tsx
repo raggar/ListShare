@@ -9,6 +9,7 @@ import {
   HeaderCover,
   ProductTile,
   PageWrapper,
+  Input,
 } from "../components/";
 
 import { PageContent } from "../styles/page-content";
@@ -59,18 +60,18 @@ const Lists: React.FC = () => {
       <HeaderCover />
       <PageContent>
         <Container>
-          <Layout style={{ alignItems: "flex-end" }}>
-            <TextButton>
-              <Typography variant="body">paste a link</Typography>
-            </TextButton>
-            <Spacer width={4} />
-            <Typography variant="body"> or </Typography>
-            <Spacer width={4} />
-            <TextButton>
-              <Typography variant="body" onClick={() => setShow(true)}>
-                add it yourself
-              </Typography>
-            </TextButton>
+          <Layout>
+            <Input placeholder="paste a link" width="400px"/>
+            <Layout style={{ alignItems: "flex-end" }}>
+              <Spacer width={16} />
+              <Typography variant="body"> or </Typography>
+              <Spacer width={4} />
+              <TextButton>
+                <Typography variant="body" onClick={() => setShow(true)}>
+                  add custom item
+                </Typography>
+              </TextButton>
+            </Layout>
           </Layout>
           <Spacer height={styles.spacing[4]} />
           <LayoutContainer>

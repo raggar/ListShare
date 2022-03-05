@@ -2,9 +2,9 @@ import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 
 interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
-  icon: any;
+  icon: JSX.Element;
   selected?: boolean;
-  selectedIcon?: any;
+  selectedIcon?: JSX.Element;
 }
 
 const ButtonWrapper = styled.button<ButtonProps>`

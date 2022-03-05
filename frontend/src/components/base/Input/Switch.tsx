@@ -72,7 +72,7 @@ function Switch(props: InputProps) {
         {isChecked ? props.onLabel : props.offLabel}
         <Spacer width={8}/>
         <StyledSwitch>
-          <input type="checkbox" checked={isChecked} onClick={handleClick} />
+          <input type="checkbox" checked={isChecked} onChange={handleClick} />
           <StyledSlider className="slider" />
         </StyledSwitch>
       </Layout>

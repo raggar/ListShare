@@ -22,10 +22,6 @@ interface ProductTileProps extends Props {
   background?: string;
 }
 
-// interface ProductTitleProps {
-// isOpen: boolean;
-// }
-
 const Wrapper = styled.div`
   width: 100%;
   display: inline-block;
@@ -68,15 +64,6 @@ const Overlay = styled.div`
 
 const MotionOverlay = motion(Overlay);
 
-// const ProductTitle = styled(Typography)<ProductTitleProps>`
-//   ${({ isOpen }) =>
-//     !isOpen
-//       ? `white-space: nowrap;
-//   overflow: hidden;
-//   text-overflow: ellipsis;`
-//       : null}
-// `;
-
 const ProductTile: React.FC<ProductTileProps> = (props: ProductTileProps) => {
   const [isOpen, setIsOpen] = useState(props.open);
   const [isHover, setIsHover] = useState(false);
@@ -110,13 +97,6 @@ const ProductTile: React.FC<ProductTileProps> = (props: ProductTileProps) => {
                 {ReactIcon(MdOpenInNew, 24)}
                 <Spacer width={8} />
                 <Typography variant="body" ellipsis>{props.productUrl}</Typography>
-                {/* <ProductTitle
-                isOpen={isOpen ?? false}
-                variant="h6"
-                color={styles.colors.text.light}
-              >
-                {props.title}
-              </ProductTitle> */}
               </Layout>
             </TextButton>
           </MotionOverlay>

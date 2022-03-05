@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import styles from "../../styles/styles";
 import { Container } from "react-bootstrap";
-import { Layout, Typography, Switch, TextButton, Spacer } from "..";
+import { Layout, Typography, Switch, Spacer, TextButton } from "..";
 
 interface HeaderProps {
   url?: string;
@@ -29,7 +29,7 @@ const TopBar = () => {
   return (
     <>
       <StyledBar>
-        <Container style={{ margin: 0, height: "100%" }}>
+        <Container style={{ margin: "auto", height: "100%" }}>
           <InnerLayout>
             <Typography variant="body">list name goes here</Typography>
             <Switch
