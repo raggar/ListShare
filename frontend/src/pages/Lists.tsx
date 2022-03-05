@@ -63,9 +63,9 @@ const Lists: React.FC = () => {
             <TextButton>
               <Typography variant="body">paste a link</Typography>
             </TextButton>
-            <Spacer width={8} />
+            <Spacer width={4} />
             <Typography variant="body"> or </Typography>
-            <Spacer width={8} />
+            <Spacer width={4} />
             <TextButton>
               <Typography variant="body" onClick={() => setShow(true)}>
                 add it yourself

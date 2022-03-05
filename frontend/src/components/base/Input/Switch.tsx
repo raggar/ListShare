@@ -1,10 +1,12 @@
-import React, { ComponentPropsWithoutRef } from "react";
+import React, { ComponentPropsWithoutRef, useState } from "react";
 import styled from "styled-components";
-import { Typography } from "..";
+import { Layout, Spacer } from "..";
 import styles from "../../../styles/styles";
 
 interface InputProps extends ComponentPropsWithoutRef<"input"> {
-  description?: string;
+  onLabel?: JSX.Element;
+  offLabel?: JSX.Element;
+  toggleAction?: () => void;
 }
 
 const StyledSwitch = styled.label`
@@ -57,13 +59,23 @@ const StyledSlider = styled.span`
 `;
 
 function Switch(props: InputProps) {
+  const [isChecked, setChecked] = useState(props.checked);
+
+  const handleClick = () => {
+    if (props.toggleAction) props.toggleAction;
+    setChecked(!isChecked);
+  };
+
   return (
     <>
-      <Typography>{props.description}</Typography>
-      <StyledSwitch>
-        <input type="checkbox" />
-        <StyledSlider className="slider" />
-      </StyledSwitch>
+      <Layout>
+        {isChecked ? props.onLabel : props.offLabel}
+        <Spacer width={8}/>
+        <StyledSwitch>
+          <input type="checkbox" checked={isChecked} onClick={handleClick} />
+          <StyledSlider className="slider" />
+        </StyledSwitch>
+      </Layout>
     </>
   );
 }

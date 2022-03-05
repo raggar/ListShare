@@ -13,6 +13,7 @@ const Layout = styled.div<LayoutProps>`
   flex-flow: ${({ col }) => (col ? "column" : "row")};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
+  align-items: center;
 `;
 
 export default Layout;

@@ -17,7 +17,7 @@ const Page = styled.div`
 
 const PageWrapper: React.FC = (props: ComponentPropsWithoutRef<"div">) => (
   <Wrapper>
-    <SideNav isLoggedIn />
+    <SideNav />
     <Page>{props.children}</Page>
   </Wrapper>
 );
