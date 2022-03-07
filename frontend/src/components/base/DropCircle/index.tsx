@@ -1,9 +1,15 @@
-import React, { ComponentPropsWithoutRef, Dispatch, SetStateAction, useState } from "react";
+import React, {
+  ComponentPropsWithoutRef,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 import { Row, Stack } from "react-bootstrap";
 import styled from "styled-components";
-import { MdExpandLess, MdExpandMore } from "react-icons/md";
+import { MdExpandMore } from "react-icons/md";
 import styles from "../../../styles/styles";
-import { Circle, ReactIcon } from "../";
+import { Circle, ReactIcon, Spacer, Typography } from "../";
+import { motion } from "framer-motion";
 
 type Props = ComponentPropsWithoutRef<"div">;
 
@@ -14,8 +20,12 @@ interface DropCircleProps extends Props {
   last?: boolean;
   first?: boolean;
   background?: string;
+
   isProductDropdown?: boolean;
-  onClick?: () => void;
+
+  specialIcon?: JSX.Element;
+  clickAction?: () => void;
+
   setState?: Dispatch<SetStateAction<boolean | undefined>>;
 }
 
@@ -33,7 +43,7 @@ const Wrapper = styled.div<DropCircleProps>`
 const TopWrapper = styled.div`
   border-left: 0.5px solid ${styles.colors.dark};
   margin-left: -${styles.spacing[3]};
-  height: ${styles.spacing[3]};
+  height: ${styles.spacing[2]};
 `;
 
 const Title = styled(Stack)`
@@ -51,44 +61,45 @@ const StyledCircle = styled(Circle)`
 `;
 
 const Details = styled.div`
+  padding-left: ${styles.spacing[1]};
   color: ${styles.colors.text.secondary};
-  transition: max-height 0.7s, opacity 3s, visibility 4s ease;
-`;
-
-const DropTitle = styled.span`
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 `;
 
 const DropCircle: React.FC<DropCircleProps> = (props: DropCircleProps) => {
   const [isOpen, setIsOpen] = useState(props.open);
+
+  const handleClick = () => {
+    if (props.clickAction) props.clickAction();
+    else {
+      setIsOpen(!isOpen);
+      if (props.setState) props.setState(!isOpen);
+    }
+  };
 
   return (
     <>
       <Wrapper {...props}>
         {props.isProductDropdown && <TopWrapper />}
         <Row>
-          <Title
-            direction="horizontal"
-            onClick={() => {
-              setIsOpen(!isOpen);
-              if (props.setState) props.setState(!isOpen);
-            }}
-          >
+          <Title direction="horizontal" onClick={handleClick}>
             <StyledCircle
-              icon={
-                isOpen
-                  ? ReactIcon(MdExpandLess, 22)
-                  : ReactIcon(MdExpandMore, 22)
-              }
+              icon={props.specialIcon ?? ReactIcon(MdExpandMore, 22)}
+              open={isOpen}
               background={props.background}
             />
-            <DropTitle className="my-auto ms-3">{props.title}</DropTitle>
+            <Spacer width={styles.spacing[1]} />
+            <Typography variant="body" ellipsis={!isOpen}>
+              {props.title}
+            </Typography>
           </Title>
         </Row>
         <Row>
-          {isOpen ? <Details className="ms-3">{props.children}</Details> : null}
+          {isOpen ? (
+            <motion.div initial={{ y: -24 }} animate={{ y: 0 }}>
+              <Details>{props.children}</Details>
+            </motion.div>
+          ) : null}
         </Row>
       </Wrapper>
     </>

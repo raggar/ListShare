@@ -2,7 +2,6 @@ import React from "react";
 import { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 import { SideNav } from "../";
-import styles from "../../styles/styles";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -13,7 +12,6 @@ const Page = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  background-color: ${styles.colors.background};
   flex: 1 1 auto;
 `;
 

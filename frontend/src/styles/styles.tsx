@@ -1,7 +1,10 @@
 const colors = {
   white: "#ffffff",
   black: "#000000",
+  grey: "#808080",
   dark: "#444444",
+  concrete: "#C4C4C4",
+  rice: "#F4F4F4",
   text: {
     dark: "#444444",
     light: "#FFFFFF",
@@ -12,8 +15,8 @@ const colors = {
 };
 
 const fonts = {
-  heading: "Inter, system-ui, sans-serif",
-  sans: "Inter, system-ui, sans-serif",
+  heading: "'Playfair Display', serif",
+  sans: "Inter, system-ui, sans-serif"
 };
 
 const spacing = {
@@ -27,22 +30,6 @@ const spacing = {
   7: "56px",
   8: "64px",
   9: "72px",
-};
-
-const fontSizes = {
-  xs: "0.75rem",
-  sm: "0.875rem",
-  md: "1rem",
-  lg: "1.125rem",
-  xl: "1.25rem",
-  "2xl": "1.5rem",
-  "3xl": "1.875rem",
-  "4xl": "2.25rem",
-  "5xl": "3rem",
-  "6xl": "3.75rem",
-  "7xl": "4.5rem",
-  "8xl": "6rem",
-  "9xl": "8rem",
 };
 
 interface IObjectKeys {
@@ -75,7 +62,6 @@ const borderRadius = {
 const styles = {
   colors,
   fonts,
-  fontSizes,
   breakpoints,
   spacing,
   borderRadius,

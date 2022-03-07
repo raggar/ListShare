@@ -21,10 +21,9 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     width: 100%;
     height: 100%;
-    background-color: ${styles.colors.white};
+    background-color: ${styles.colors.rice};
     color: ${styles.colors.text.dark};
     font-family: ${styles.fonts.sans};
-    font-size: ${styles.fontSizes.md};
   }
 
   #root {

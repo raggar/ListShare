@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { BaseRoute } from "./constants/routes";
 import { QueryClientProvider } from "react-query";
 import { queryCache } from "./api";
+import "./styles/font.css";
 
 const AppRoutes: React.FC = () => (
   <BrowserRouter>

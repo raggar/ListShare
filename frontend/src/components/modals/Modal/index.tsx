@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { Modal as ReactModal, Row } from "react-bootstrap";
+import { Modal as ReactModal } from "react-bootstrap";
 import styles from "../../../styles/styles";
 import { ReactIcon } from "../../base";
 import { MdClose } from "react-icons/md";
@@ -10,6 +10,7 @@ type Props = ComponentPropsWithoutRef<"div">;
 export interface ModalProps extends Props {
   show: boolean;
   setShow: Dispatch<SetStateAction<boolean>>;
+  modalCTA?: JSX.Element;
 }
 
 const StyledModal = styled(ReactModal)`
@@ -41,13 +42,9 @@ function Modal(props: ModalProps) {
         {ReactIcon(MdClose, 24)}
       </CloseWrapper>
       <ModalContent>{props.children}</ModalContent>
+      {props.modalCTA ?? null}
     </StyledModal>
   );
 }
 
 export default Modal;
-
-export const BottomWrapper = styled(Row)`
-  justify-content: flex-end;
-  margin: ${styles.spacing[0]};
-`;

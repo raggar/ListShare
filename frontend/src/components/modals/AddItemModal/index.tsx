@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { MdAttachMoney, MdEdit, MdLink } from "react-icons/md";
 import { Modal } from "..";
-import { Button, Input, ReactIcon, Spacer, Typography } from "../../base";
-import { BottomWrapper, ModalProps } from "../Modal";
+import { Button, Input, Spacer, Typography } from "../../base";
+import { ModalProps } from "../Modal";
 
 interface AddItemModalProps extends ModalProps {
   listName?: string;
@@ -21,7 +21,14 @@ function AddItemModal(props: AddItemModalProps) {
   };
 
   return (
-    <Modal {...props}>
+    <Modal
+      {...props}
+      modalCTA={
+        <Button primary type="submit">
+          save
+        </Button>
+      }
+    >
       <Typography variant="h5">
         add item
         {props.listName ? `to &quot;${props.listName}&quot;` : ""}
@@ -29,23 +36,23 @@ function AddItemModal(props: AddItemModalProps) {
       <Spacer height={24} />
       <Form onSubmit={handleSubmit}>
         <Input
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          icon={ReactIcon(MdLink, 18)}
-          placeholder="product url"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          icon={MdEdit}
+          placeholder="item name"
         />
         <Spacer height={8} />
         <Input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          icon={ReactIcon(MdEdit, 18)}
-          placeholder="product name"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          icon={MdLink}
+          placeholder="item url"
         />
         <Spacer height={8} />
         <Input
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          icon={ReactIcon(MdAttachMoney, 18)}
+          icon={MdAttachMoney}
           placeholder="price"
         />
         <Spacer height={8} />
@@ -53,14 +60,8 @@ function AddItemModal(props: AddItemModalProps) {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           area
-          placeholder="comments"
+          placeholder="anything else you want to add?"
         />
-        <Spacer height={24} />
-        <BottomWrapper>
-          <Button primary type="submit">
-            save
-          </Button>
-        </BottomWrapper>
       </Form>
     </Modal>
   );
