@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Button from "../base/Button";
 import styled from "styled-components";
 import styles from "../../styles/styles";
-import { DropCircle, NavTopItem, Spacer, NewButton } from "../";
-import { MdBookmark, MdHomeFilled, MdSearch } from "react-icons/md";
+import { DropCircle, NewButton, ReactIcon, Typography } from "../";
 import { ICategory } from "../../interfaces";
-import { AddListModal, LoginModal } from "../modals";
+import { AddListModal, RegisterModal } from "../modals";
+import { MdFavorite, MdSearch, MdSettings } from "react-icons/md";
+import { IconButton, Button } from "../base";
 
 interface SideNavProps {
   isLoggedIn?: boolean;
@@ -17,12 +17,12 @@ interface ListItemProps {
 
 const StyledContainer = styled.div<SideNavProps>`
   background-color: ${styles.colors.white};
-  width: 300px;
+  width: 240px;
   z-index: 999;
   height: 100%;
   display: flex;
   flex-flow: column;
-
+  border-right: 0.5px solid ${styles.colors.concrete};
   flex: 1 0 auto;
 `;
 
@@ -31,6 +31,20 @@ const BottomWrapper = styled.div`
   width: 100%;
   z-index: 10;
   flex: 0 1 auto;
+`;
+
+const ProfileButton = styled.div`
+  border: none;
+  border-top: 0.5px solid ${styles.colors.concrete};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 48px;
+  outline: none;
+  background-color: ${styles.colors.white};
+  color: ${styles.colors.text.secondary};
 `;
 
 const MiddleWrapper = styled.div`
@@ -71,8 +85,8 @@ const ListItem = styled.a<ListItemProps>`
   text-decoration: none;
   color: inherit;
 
-  :hover {
-    color: ${styles.colors.text.dark};
+  &:hover {
+    color: ${styles.colors.text.accent};
   }
 `;
 
@@ -80,6 +94,16 @@ const ButtonWrapper = styled.div`
   margin-left: -14px;
   bottom: -${styles.spacing[3]};
   position: absolute;
+`;
+
+const SettingsButton = styled(IconButton)`
+  position: absolute;
+  right: ${styles.spacing[3]};
+
+  &:hover {
+    cursor: pointer;
+    color: ${styles.colors.text.accent};
+  }
 `;
 
 const categories: ICategory[] = [
@@ -143,18 +167,28 @@ const SideNav = (props: SideNavProps) => {
   return (
     <StyledContainer>
       <AddListModal show={show} setShow={setShow} />
-      <LoginModal show={showRegister} setShow={setShowRegister} />
+      <RegisterModal show={showRegister} setShow={setShowRegister} />
       <TopWrapper>
-        <NavTopItem name="home" icon={MdHomeFilled} link="/" />
-        <Spacer height={24} />
-        <NavTopItem name="search" icon={MdSearch} link="/search" />
-        <Spacer height={24} />
-        <NavTopItem name="your lists" icon={MdBookmark} link="/lists" />
         <ButtonWrapper onClick={() => setShow(true)}>
           <NewButton />
         </ButtonWrapper>
       </TopWrapper>
       <MiddleWrapper>
+        <DropCircle
+          title="favourites"
+          background={styles.colors.white}
+          specialIcon={ReactIcon(MdFavorite, 18)}
+          // todo: add action
+          clickAction={() => {}}
+          first
+        />
+        <DropCircle
+          title="search"
+          background={styles.colors.white}
+          specialIcon={ReactIcon(MdSearch, 18)}
+          // todo: add action
+          clickAction={() => {}}
+        />
         {categories.map(
           ({ category_name, category_lists }, category_i, { length }) => {
             return (
@@ -163,13 +197,12 @@ const SideNav = (props: SideNavProps) => {
                 background={styles.colors.white}
                 key={category_i}
                 last={length - 1 == category_i}
-                first={category_i == 0}
               >
                 {category_lists
                   ? category_lists.map(({ list_name }, list_i) => {
                       return (
                         <ListItem href="" key={list_i}>
-                          {list_name}
+                          <Typography variant="body">{list_name}</Typography>
                         </ListItem>
                       );
                     })
@@ -181,9 +214,10 @@ const SideNav = (props: SideNavProps) => {
       </MiddleWrapper>
       <BottomWrapper>
         {props.isLoggedIn ? (
-          <Button primary className="w-100">
-            your profile
-          </Button>
+          <ProfileButton>
+            <Typography variant="body">hello sarah</Typography>
+            <SettingsButton icon={ReactIcon(MdSettings, 24)} />
+          </ProfileButton>
         ) : (
           <Button
             primary

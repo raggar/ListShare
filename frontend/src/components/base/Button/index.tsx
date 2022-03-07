@@ -1,5 +1,6 @@
 import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
+import { Typography } from "..";
 import styles from "../../../styles/styles";
 
 type Props = ComponentPropsWithoutRef<"button">;
@@ -29,7 +30,11 @@ const StyledButton = styled.button<ButtonProps>`
 `;
 
 function Button(props: ButtonProps) {
-  return <StyledButton {...props}>{props.children}</StyledButton>;
+  return (
+    <StyledButton {...props}>
+      <Typography variant="body">{props.children}</Typography>
+    </StyledButton>
+  );
 }
 
 export default Button;
