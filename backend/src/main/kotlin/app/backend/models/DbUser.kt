@@ -14,7 +14,7 @@ import javax.persistence.Table
 
 @Entity(name = "DbUser")
 @Table(name = "db_users")
-open class DbUser {
+class DbUser {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   val id: Int = 0

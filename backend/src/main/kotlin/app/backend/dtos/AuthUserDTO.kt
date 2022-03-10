@@ -1,7 +1,9 @@
 package app.backend.dtos
 
-import app.backend.models.DbUser
-
-class AuthUserDTO : DbUser() {
+class AuthUserDTO {
   var token = ""
+  var email = ""
+  var firstname = ""
+  var lastname = ""
+  var id = 0
 }
