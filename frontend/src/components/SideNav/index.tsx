@@ -3,7 +3,7 @@ import styled from "styled-components";
 import styles from "../../styles/styles";
 import { DropCircle, NewButton, ReactIcon, Typography } from "../";
 import { ICategory } from "../../interfaces";
-import { AddListModal, RegisterModal } from "../modals";
+import { AddListModal, RegisterModal, LoginModal } from "../modals";
 import { MdFavorite, MdSearch, MdSettings } from "react-icons/md";
 import { IconButton, Button } from "../base";
 
@@ -163,11 +163,13 @@ const categories: ICategory[] = [
 const SideNav = (props: SideNavProps) => {
   const [show, setShow] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   return (
     <StyledContainer>
       <AddListModal show={show} setShow={setShow} />
       <RegisterModal show={showRegister} setShow={setShowRegister} />
+      <LoginModal show={showLogin} setShow={setShowLogin} />
       <TopWrapper>
         <ButtonWrapper onClick={() => setShow(true)}>
           <NewButton />
@@ -219,13 +221,22 @@ const SideNav = (props: SideNavProps) => {
             <SettingsButton icon={ReactIcon(MdSettings, 24)} />
           </ProfileButton>
         ) : (
-          <Button
-            primary
-            className="w-100"
-            onClick={() => setShowRegister(true)}
-          >
-            login or register
-          </Button>
+          <>
+            <Button
+              primary
+              className="w-100"
+              onClick={() => setShowRegister(true)}
+            >
+              register
+            </Button>
+            <Button
+              primary
+              className="w-100"
+              onClick={() => setShowLogin(true)}
+            >
+              login
+            </Button>
+          </>
         )}
       </BottomWrapper>
     </StyledContainer>
