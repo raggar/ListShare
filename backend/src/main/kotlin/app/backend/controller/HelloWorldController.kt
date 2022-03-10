@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletResponse
 @RestController
 @RequestMapping("/api/hello")
 class HelloWorldController {
-
   @GetMapping("")
   fun helloWorld(request: HttpServletRequest, response: HttpServletResponse): ResponseEntity<String> {
-    println("Hi")
     return ResponseEntity.ok("Hello World")
   }
 }

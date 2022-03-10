@@ -7,6 +7,7 @@ import styles from "../../../styles/styles";
 import { Button, Layout, Spacer, Typography } from "../../base";
 import { Input } from "../../base";
 import { ModalProps } from "../Modal";
+import { registerUser } from "../../../api";
 
 export const StyledRow = styled(Row)`
   margin: ${styles.spacing[0]};
@@ -18,33 +19,41 @@ export const StyledCol = styled(Col)`
 `;
 
 function RegisterModal(props: ModalProps) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = async () => {
-    // todo: validate
-    // do something with firstName, lastName, email, password, confirmPassword
+  const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+
+    if (password != confirmPassword) {
+      return;
+    }
+
+    try {
+      await registerUser({
+        firstname,
+        lastname,
+        email,
+        password,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    props.setShow(false);
   };
 
   return (
-    <Modal
-      {...props}
-      modalCTA={
-        <Button primary type="submit">
-          submit
-        </Button>
-      }
-    >
+    <Modal {...props}>
       <Typography variant="h5">create an account</Typography>
       <Spacer height={24} />
       <Form onSubmit={handleSubmit}>
         <Layout>
           <Input
             placeholder="first name"
-            value={firstName}
+            value={firstname}
             onChange={(e) => setFirstName(e.target.value)}
           />
 
@@ -52,7 +61,7 @@ function RegisterModal(props: ModalProps) {
 
           <Input
             placeholder="last name"
-            value={lastName}
+            value={lastname}
             onChange={(e) => setLastName(e.target.value)}
           />
         </Layout>
@@ -77,6 +86,9 @@ function RegisterModal(props: ModalProps) {
           icon={MdPassword}
           placeholder="re-type password"
         />
+        <Button primary type="submit">
+          submit
+        </Button>
       </Form>
     </Modal>
   );
