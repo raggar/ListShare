@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import api from "./";
+import api from "./core";
 
 export interface List {
   name: string;

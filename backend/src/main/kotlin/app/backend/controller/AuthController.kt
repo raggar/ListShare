@@ -34,7 +34,6 @@ class AuthController(private val userService: UserService) {
     user.lastname = cleanName(body.lastname)
     user.email = cleanEmail(body.email)
     user.password = cleanPassword(body.password)
-
     if (!isEmailValid(user.email)) {
       throw RegistrationException("Email is invalid!")
     }
@@ -52,7 +51,7 @@ class AuthController(private val userService: UserService) {
     val password = cleanPassword(body.password)
 
     val user = (userService.findByEmail(email)
-        ?: throw LoginException("Email not found!")) as AuthUserDTO
+        ?: throw LoginException("Email not found!"))
 
     if (!user.comparePassword(password)) {
       throw LoginException("Invalid password!")
@@ -66,9 +65,14 @@ class AuthController(private val userService: UserService) {
         .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
         .compact()
 
-    user.token = jwt
+    val returnUser = AuthUserDTO()
+    returnUser.token = jwt
+    returnUser.id = user.id
+    returnUser.firstname = user.firstname
+    returnUser.lastname = user.lastname
+    returnUser.email = user.email
 
-    return ResponseEntity.ok(user)
+    return ResponseEntity.ok(returnUser)
   }
 
   @PostMapping("/logout")

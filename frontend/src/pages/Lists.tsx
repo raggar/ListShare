@@ -17,6 +17,7 @@ import styles from "../styles/styles";
 import { AddItemModal } from "../components/modals";
 import TopBar from "../components/TopBar.tsx";
 import { MdLink } from "react-icons/md";
+// import { useLists } from "../api";
 
 // todo: fix media queries
 const LayoutContainer = styled.div`
@@ -40,6 +41,8 @@ const LayoutContainer = styled.div`
 const Lists: React.FC = () => {
   const [show, setShow] = useState(false);
   const [url, setUrl] = useState("");
+
+  // const { data: lists, refetch: refetchLists, isLoading } = useLists();
 
   return (
     <PageWrapper>
