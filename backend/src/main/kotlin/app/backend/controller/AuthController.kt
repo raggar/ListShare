@@ -65,14 +65,13 @@ class AuthController(private val userService: UserService) {
         .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
         .compact()
 
-    val returnUser = AuthUserDTO()
-    returnUser.token = jwt
-    returnUser.id = user.id
-    returnUser.firstname = user.firstname
-    returnUser.lastname = user.lastname
-    returnUser.email = user.email
-
-    return ResponseEntity.ok(returnUser)
+    return ResponseEntity.ok(AuthUserDTO(
+        token = jwt,
+        id = user.id,
+        firstname = user.firstname,
+        lastname = user.lastname,
+        email = user.email
+    ))
   }
 
   @PostMapping("/logout")
