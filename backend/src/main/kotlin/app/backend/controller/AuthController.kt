@@ -28,21 +28,22 @@ class AuthController(private val userService: UserService) {
 
   @PostMapping("/register")
   fun register(@RequestBody body: RegisterDTO): ResponseEntity<DbUser> {
-    val user = DbUser()
-
-    user.firstname = cleanName(body.firstname)
-    user.lastname = cleanName(body.lastname)
-    user.email = cleanEmail(body.email)
+    val dbUser = DbUser(
+        firstname = cleanName(body.firstname),
+        lastname = cleanName(body.lastname),
+        email = cleanName(body.lastname),
+    )
     user.password = cleanPassword(body.password)
-    if (!isEmailValid(user.email)) {
+
+    if (!isEmailValid(dbUser.email)) {
       throw RegistrationException("Email is invalid!")
     }
 
-    if (userService.findByEmail(user.email) != null) {
+    if (userService.findByEmail(dbUser.email) != null) {
       throw RegistrationException("Email in use!")
     }
 
-    return ResponseEntity.ok(userService.save(user))
+    return ResponseEntity.ok(userService.save(dbUser))
   }
 
   @PostMapping("/login")
