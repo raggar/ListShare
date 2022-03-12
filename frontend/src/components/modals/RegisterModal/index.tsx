@@ -25,6 +25,7 @@ function RegisterModal(props: ModalProps) {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = async () => {
+
     // todo: validate
     // do something with firstName, lastName, email, password, confirmPassword
   };
