@@ -12,7 +12,6 @@ function LoginModal(props: ModalProps) {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
-    console.log("Hello");
     e.preventDefault();
     try {
       await loginUser({
