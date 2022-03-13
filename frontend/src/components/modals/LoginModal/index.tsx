@@ -1,28 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form } from "react-bootstrap";
 import { MdMail, MdPassword } from "react-icons/md";
 import { Modal } from "..";
 import { Button, Spacer, Typography } from "../../base";
 import { Input } from "../../base";
+import { useForm } from "../../../utils";
 import { ModalProps } from "../Modal";
 import { loginUser } from "../../../api";
 
 function LoginModal(props: ModalProps) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
       await loginUser({
         email,
         password,
       });
     } catch (e) {
-      console.log(e);
+      setErrors(["Something went wrong"]);
     }
     props.setShow(false);
   };
+
+  const {
+    onChange,
+    onSubmit,
+    values: { email, password },
+    setErrors,
+  } = useForm(handleSubmit, {
+    email: "",
+    lastname: "",
+  });
 
   return (
     <Modal
@@ -35,17 +42,19 @@ function LoginModal(props: ModalProps) {
     >
       <Typography variant="h5">login</Typography>
       <Spacer height={24} />
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={onSubmit}>
         <Input
+          name="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={onChange}
           icon={MdMail}
           placeholder="email"
         />
         <Spacer height={8} />
         <Input
+          name="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={onChange}
           icon={MdPassword}
           placeholder="password"
         />
