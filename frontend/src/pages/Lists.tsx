@@ -20,8 +20,6 @@ import { MdLink } from "react-icons/md";
 
 import axios from "axios";
 
-// import { useQuery } from "react-query";
-
 // todo: fix media queries
 const LayoutContainer = styled.div`
   grid-column-gap: ${styles.spacing[3]};
@@ -42,8 +40,7 @@ const LayoutContainer = styled.div`
 `;
 
 const api = axios.create({
-  // baseURL: process.env.REACT_APP_SCRAPER_URL,
-  baseURL: "http://localhost:5000",
+  baseURL: process.env.REACT_APP_SCRAPER_URL,
 });
 export interface LinkItem {
   title: string;
@@ -55,8 +52,7 @@ const Lists: React.FC = () => {
   const [show, setShow] = useState(false);
   const [url, setUrl] = useState("");
 
-  function getTags(url: string) {
-    console.log(process.env.REACT_APP_SCRAPER_URL);
+  const getTags = (url: string) => {
     return api
       .get<LinkItem>("/scrape", {
         params: {
@@ -64,16 +60,8 @@ const Lists: React.FC = () => {
         },
       })
       .then((response) => response.data);
-    // return useQuery(url, () =>
-    //   api
-    //     .get<LinkItem>("/scrape", {
-    //       params: {
-    //         url: url,
-    //       },
-    //     })
-    //     .then((response) => response.data)
-    // );
-  }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
 

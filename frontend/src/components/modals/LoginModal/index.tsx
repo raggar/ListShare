@@ -5,14 +5,23 @@ import { Modal } from "..";
 import { Button, Spacer, Typography } from "../../base";
 import { Input } from "../../base";
 import { ModalProps } from "../Modal";
+import { loginUser } from "../../../api";
 
 function LoginModal(props: ModalProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async () => {
-    // todo: validate
-    // do something with email, password
+  const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+    try {
+      await loginUser({
+        email,
+        password,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    props.setShow(false);
   };
 
   return (

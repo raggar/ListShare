@@ -1,12 +1,13 @@
-package app.backend.controller
+package app.backend.controllers
 
-import app.backend.dtos.CreateProductDTO
+import app.backend.dtos.CreateListDTO
 import app.backend.dtos.UpdateListDTO
 import app.backend.errors.ResourceNotFoundException
 import app.backend.models.DbList
 import app.backend.models.DbProduct
 import app.backend.services.ListService
-import app.backend.util.decodeJwt
+import app.backend.services.UserService
+import app.backend.utils.decodeJwt
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("/api/lists")
-class ListController(private val listService: ListService) {
+class ListController(private val userService: UserService, private val listService: ListService) {
   @GetMapping("/all")
   fun getAllLists(request: HttpServletRequest): ResponseEntity<List<DbList>> {
     decodeJwt(request)
@@ -33,25 +34,34 @@ class ListController(private val listService: ListService) {
     return ResponseEntity.ok(list)
   }
 
-  @PostMapping("/add_product")
-  fun addProduct(request: HttpServletRequest, @RequestBody body: CreateProductDTO): ResponseEntity<DbProduct> {
+  @GetMapping("/{user_id}/lists")
+  fun getLists(request: HttpServletRequest, @PathVariable("user_id") userId: String): ResponseEntity<List<DbList>> {
+    decodeJwt(request)
+    val user = userService.findByIdOrNull(userId.toInt()) ?: throw ResourceNotFoundException()
+    return ResponseEntity.ok(user.lists)
+  }
+
+  @PostMapping("/add_list")
+  fun addList(request: HttpServletRequest, @RequestBody body: CreateListDTO): ResponseEntity<DbList> {
     val decodedJwt = decodeJwt(request)
-    val productToCreate = DbProduct()
+    val owner = userService.findByIdOrNull(decodedJwt.issuer.toInt()) ?: throw ResourceNotFoundException()
 
-    productToCreate.name = body.name
-    productToCreate.comment = body.comment
-    productToCreate.productLink = body.productLink
+    val listToCreate = DbList(
+        name = body.name,
+        shareLink = body.shareLink,
+        comment = body.comment,
+        category = body.category,
+        user = owner,
+        products = mutableListOf<DbProduct>(),
+    )
 
-    val list = listService.addProduct(decodedJwt.issuer.toInt(), productToCreate)
-
-    return ResponseEntity.ok(list)
+    return ResponseEntity.ok(listService.addList(listToCreate))
   }
 
   @PutMapping("/update/{list_id}")
   fun updateList(request: HttpServletRequest, @PathVariable("list_id") listId: String, @RequestBody body: UpdateListDTO): ResponseEntity<DbList> {
     decodeJwt(request)
-    val list = listService.updateList(listId.toInt(), body)
-    return ResponseEntity.ok(list)
+    return ResponseEntity.ok(listService.updateList(listId.toInt(), body))
   }
 
   @PutMapping("/delete/{delete_list}")

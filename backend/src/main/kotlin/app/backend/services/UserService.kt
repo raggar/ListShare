@@ -19,10 +19,4 @@ class UserService(private val userRepository: UserRepository, private val listRe
   fun findByEmail(email: String): DbUser? = userRepository.findByEmail(email)
 
   fun findByIdOrNull(id: Int): DbUser? = userRepository.findByIdOrNull(id)
-
-  fun addList(userId: Int, list: DbList): DbList {
-    val user = userRepository.findByIdOrNull(userId) ?: throw ResourceNotFoundException()
-    list.user = user
-    return listRepository.save(list)
-  }
 }

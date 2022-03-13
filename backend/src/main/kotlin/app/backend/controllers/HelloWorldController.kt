@@ -1,4 +1,4 @@
-package app.backend.controller
+package app.backend.controllers
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletResponse
 @RestController
 @RequestMapping("/api/hello")
 class HelloWorldController {
-
   @GetMapping("")
   fun helloWorld(request: HttpServletRequest, response: HttpServletResponse): ResponseEntity<String> {
-    println("Hi")
     return ResponseEntity.ok("Hello World")
   }
 }

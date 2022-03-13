@@ -1,4 +1,4 @@
-package app.backend.controller
+package app.backend.controllers
 
 import app.backend.JWT_SECRET
 import app.backend.dtos.AuthUserDTO
@@ -6,12 +6,15 @@ import app.backend.dtos.LoginDTO
 import app.backend.dtos.RegisterDTO
 import app.backend.errors.LoginException
 import app.backend.errors.RegistrationException
+import app.backend.models.DbList
 import app.backend.models.DbUser
 import app.backend.services.UserService
-import app.backend.util.cleanEmail
-import app.backend.util.cleanName
-import app.backend.util.cleanPassword
-import app.backend.util.isEmailValid
+import app.backend.utils.cleanEmail
+import app.backend.utils.cleanName
+import app.backend.utils.cleanPassword
+import app.backend.utils.comparePassword
+import app.backend.utils.encryptPassword
+import app.backend.utils.isEmailValid
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.http.ResponseEntity
@@ -28,12 +31,13 @@ class AuthController(private val userService: UserService) {
 
   @PostMapping("/register")
   fun register(@RequestBody body: RegisterDTO): ResponseEntity<DbUser> {
-    val user = DbUser()
-
-    user.firstname = cleanName(body.firstname)
-    user.lastname = cleanName(body.lastname)
-    user.email = cleanEmail(body.email)
-    user.password = cleanPassword(body.password)
+    val user = DbUser(
+        firstname = cleanName(body.firstname),
+        lastname = cleanName(body.lastname),
+        email = cleanName(body.email),
+        password = encryptPassword(cleanPassword(body.password)),
+        lists = mutableListOf<DbList>(),
+    )
 
     if (!isEmailValid(user.email)) {
       throw RegistrationException("Email is invalid!")
@@ -48,13 +52,13 @@ class AuthController(private val userService: UserService) {
 
   @PostMapping("/login")
   fun login(request: HttpServletRequest, @RequestBody body: LoginDTO): ResponseEntity<AuthUserDTO> {
-    val email = cleanEmail(body.email)
-    val password = cleanPassword(body.password)
+    val cleanedEmail = cleanEmail(body.email)
+    val cleanedPassword = cleanPassword(body.password)
 
-    val user = (userService.findByEmail(email)
-        ?: throw LoginException("Email not found!")) as AuthUserDTO
+    val user = (userService.findByEmail(cleanedEmail)
+        ?: throw LoginException("Email not found!"))
 
-    if (!user.comparePassword(password)) {
+    if (!comparePassword(cleanedPassword, user.password)) {
       throw LoginException("Invalid password!")
     }
 
@@ -66,9 +70,13 @@ class AuthController(private val userService: UserService) {
         .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
         .compact()
 
-    user.token = jwt
-
-    return ResponseEntity.ok(user)
+    return ResponseEntity.ok(AuthUserDTO(
+        token = jwt,
+        id = user.id,
+        firstname = user.firstname,
+        lastname = user.lastname,
+        email = user.email
+    ))
   }
 
   @PostMapping("/logout")
