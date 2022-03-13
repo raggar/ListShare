@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { MdMail, MdPassword } from "react-icons/md";
 import styled from "styled-components";
+
+import { useForm } from "../../../utils";
+import { ModalProps } from "../Modal";
 import { Modal } from "..";
 import styles from "../../../styles/styles";
-import { Button, Layout, Spacer, Typography } from "../../base";
-import { Input } from "../../base";
-import { ModalProps } from "../Modal";
+import { Button, Input, Layout, Spacer, Typography } from "../../base";
 import { registerUser } from "../../../api";
 
 export const StyledRow = styled(Row)`
@@ -19,16 +20,9 @@ export const StyledCol = styled(Col)`
 `;
 
 function RegisterModal(props: ModalProps) {
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     if (password != confirmPassword) {
+      setErrors(["Passwords do not match"]);
       return;
     }
 
@@ -40,49 +34,68 @@ function RegisterModal(props: ModalProps) {
         password,
       });
     } catch (e) {
-      console.log(e);
+      setErrors(["Something went wrong"]);
     }
+
     props.setShow(false);
   };
+
+  const {
+    onChange,
+    onSubmit,
+    values: { firstname, lastname, email, password, confirmPassword },
+    setErrors,
+  } = useForm(handleSubmit, {
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   return (
     <Modal {...props}>
       <Typography variant="h5">create an account</Typography>
       <Spacer height={24} />
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={onSubmit}>
         <Layout>
           <Input
+            name="firstname"
             placeholder="first name"
             value={firstname}
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={onChange}
           />
 
           <Spacer width={8} />
 
           <Input
+            name="lastname"
             placeholder="last name"
             value={lastname}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={onChange}
           />
         </Layout>
         <Spacer height={8} />
         <Input
+          name="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={onChange}
           icon={MdMail}
           placeholder="email"
         />
         <Spacer height={8} />
         <Input
+          name="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={onChange}
           icon={MdPassword}
           placeholder="password"
         />
         <Spacer height={8} />
         <Input
+          name="confirmPassword"
           value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          onChange={onChange}
           icon={MdPassword}
           placeholder="re-type password"
         />
