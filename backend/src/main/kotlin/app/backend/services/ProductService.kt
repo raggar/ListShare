@@ -15,6 +15,8 @@ class ProductService(private val productRepository: ProductRepository) {
 
   fun deleteProduct(id: Int) = productRepository.deleteById(id)
 
+  fun addProduct(product: DbProduct) = productRepository.save(product)
+
   fun updateProduct(productId: Int, body: UpdateProductDTO): DbProduct {
     val product = productRepository.findByIdOrNull(productId) ?: throw ResourceNotFoundException()
 
