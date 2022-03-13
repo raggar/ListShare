@@ -7,6 +7,7 @@ import { useForm } from "../../../utils";
 import { ModalProps } from "../Modal";
 import { Modal } from "..";
 import styles from "../../../styles/styles";
+import ErrorMessage from "../../ErrorMessage";
 import { Button, Input, Layout, Spacer, Typography } from "../../base";
 import { registerUser } from "../../../api";
 
@@ -21,8 +22,28 @@ export const StyledCol = styled(Col)`
 
 function RegisterModal(props: ModalProps) {
   const handleSubmit = async () => {
+    if (!firstname) {
+      setError("Firstname cannot be blank");
+      return;
+    }
+
+    if (!lastname) {
+      setError("Lastname cannot be blank");
+      return;
+    }
+
+    if (!email) {
+      setError("Email cannot be blank");
+      return;
+    }
+
+    if (!password) {
+      setError("Password cannot be blank");
+      return;
+    }
+
     if (password != confirmPassword) {
-      setErrors(["Passwords do not match"]);
+      setError("Passwords do not match");
       return;
     }
 
@@ -33,8 +54,9 @@ function RegisterModal(props: ModalProps) {
         email,
         password,
       });
-    } catch (e) {
-      setErrors(["Something went wrong"]);
+    } catch (e: any) {
+      setError(e.response?.data?.message ?? "Something went wrong.");
+      return;
     }
 
     props.setShow(false);
@@ -44,7 +66,8 @@ function RegisterModal(props: ModalProps) {
     onChange,
     onSubmit,
     values: { firstname, lastname, email, password, confirmPassword },
-    setErrors,
+    setError,
+    error,
   } = useForm(handleSubmit, {
     firstname: "",
     lastname: "",
@@ -65,9 +88,7 @@ function RegisterModal(props: ModalProps) {
             value={firstname}
             onChange={onChange}
           />
-
           <Spacer width={8} />
-
           <Input
             name="lastname"
             placeholder="last name"
@@ -103,6 +124,7 @@ function RegisterModal(props: ModalProps) {
           submit
         </Button>
       </Form>
+      <ErrorMessage>{error}</ErrorMessage>
     </Modal>
   );
 }

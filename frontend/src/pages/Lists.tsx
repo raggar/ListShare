@@ -39,6 +39,7 @@ const LayoutContainer = styled.div`
 `;
 
 const Lists: React.FC = () => {
+  // const { data, isLoading } = useLists();
   const [show, setShow] = useState(false);
   const [url, setUrl] = useState("");
 
