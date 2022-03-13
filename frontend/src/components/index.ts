@@ -6,4 +6,7 @@ export * from "./SideNav/NavTopItem";
 
 export { default as ProductTile } from "./ProductTile";
 export { default as HeaderCover } from "./HeaderCover";
+
+export { default as ErrorMessage } from "./ErrorMessage/";
+
 export * from "./base";

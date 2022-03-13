@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form } from "react-bootstrap";
 import { MdMail, MdPassword } from "react-icons/md";
 import { Modal } from "..";
 import { Button, Spacer, Typography } from "../../base";
 import { Input } from "../../base";
 import { useForm } from "../../../utils";
+import { AuthContext, UserData } from "../../../contexts/AuthContextProvider";
 import { ModalProps } from "../Modal";
 import { loginUser } from "../../../api";
+import ErrorMessage from "../../ErrorMessage";
 
 function LoginModal(props: ModalProps) {
+  const { login } = useContext(AuthContext);
   const handleSubmit = async () => {
     try {
       await loginUser({
         email,
         password,
-      });
-    } catch (e) {
-      setErrors(["Something went wrong"]);
+      }).then((userData: UserData) => login(userData));
+    } catch (e: any) {
+      setError(e.response?.data?.message ?? "Something went wrong.");
     }
     props.setShow(false);
   };
@@ -25,7 +28,8 @@ function LoginModal(props: ModalProps) {
     onChange,
     onSubmit,
     values: { email, password },
-    setErrors,
+    error,
+    setError,
   } = useForm(handleSubmit, {
     email: "",
     lastname: "",
@@ -59,6 +63,7 @@ function LoginModal(props: ModalProps) {
           placeholder="password"
         />
       </Form>
+      <ErrorMessage>{error}</ErrorMessage>
     </Modal>
   );
 }
