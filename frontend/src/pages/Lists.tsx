@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import styled from "styled-components";
 import {
   Layout,
@@ -17,7 +17,8 @@ import styles from "../styles/styles";
 import { AddItemModal } from "../components/modals";
 import TopBar from "../components/TopBar.tsx";
 import { MdLink } from "react-icons/md";
-// import { useLists } from "../api";
+
+import axios from "axios";
 
 // todo: fix media queries
 const LayoutContainer = styled.div`
@@ -38,11 +39,40 @@ const LayoutContainer = styled.div`
   }
 `;
 
+const api = axios.create({
+  baseURL: process.env.REACT_APP_SCRAPER_URL,
+});
+export interface LinkItem {
+  title: string;
+  description: string;
+  image: string;
+}
+
 const Lists: React.FC = () => {
   const [show, setShow] = useState(false);
   const [url, setUrl] = useState("");
 
-  // const { data: lists, refetch: refetchLists, isLoading } = useLists();
+  const getTags = (url: string) => {
+    return api
+      .get<LinkItem>("/scrape", {
+        params: {
+          url: url,
+        },
+      })
+      .then((response) => response.data);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+
+    try {
+      const res = await getTags(url);
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+    // setShow(true);
+  };
 
   return (
     <PageWrapper>
@@ -52,13 +82,15 @@ const Lists: React.FC = () => {
       <PageContent>
         <Container>
           <Layout>
-            <Input
-              placeholder="paste a link"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              icon={MdLink}
-              width="400px"
-            />
+            <Form onSubmit={handleSubmit}>
+              <Input
+                placeholder="paste a link"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                icon={MdLink}
+                width="400px"
+              />
+            </Form>
             <Layout style={{ alignItems: "flex-end" }}>
               <Spacer width={16} />
               <Typography variant="body"> or </Typography>
