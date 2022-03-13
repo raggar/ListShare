@@ -15,28 +15,28 @@ import javax.persistence.Table
 
 @Entity(name = "DbList")
 @Table(name = "db_lists")
-class DbList {
+class DbList (
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  val id: Int = 0
+  val id: Int = 0,
 
   @Column(nullable = false)
-  var name: String = ""
+  var name: String,
 
   @Column(nullable = false)
-  var shareLink: String = ""
+  var shareLink: String,
 
   @Column(nullable = false)
-  var comment: String = ""
+  var comment: String,
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "user_id", nullable = false)
   @JsonIgnore
-  lateinit var user: DbUser
+  val user: DbUser,
 
   @Column(nullable = false)
-  var category: String = ""
+  var category: String,
 
   @OneToMany(mappedBy = "list", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-  var products: MutableList<DbProduct> = mutableListOf()
-}
+  val products: MutableList<DbProduct>,
+)

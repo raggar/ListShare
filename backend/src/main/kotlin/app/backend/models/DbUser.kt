@@ -14,31 +14,24 @@ import javax.persistence.Table
 
 @Entity(name = "DbUser")
 @Table(name = "db_users")
-class DbUser {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  val id: Int = 0
+class DbUser(
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    val id: Int = 0,
 
-  @Column(nullable = false)
-  var firstname: String = ""
+    @Column(nullable = false)
+    val firstname: String,
 
-  @Column(nullable = false)
-  var lastname: String = ""
+    @Column(nullable = false)
+    val lastname: String,
 
-  @Column(unique = true, nullable = false)
-  var email: String = ""
+    @Column(unique = true, nullable = false)
+    val email: String,
 
-  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-  var lists: MutableList<DbList> = mutableListOf()
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    val lists: MutableList<DbList>,
 
-  @Column(nullable = false)
-  var password: String = ""
-    @JsonIgnore // ignore password field when returning a user
-    get() = field
-    set(value) {
-      val passwordEncoder = BCryptPasswordEncoder()
-      field = passwordEncoder.encode(value)
-    }
-
-  fun comparePassword(password: String): Boolean = BCryptPasswordEncoder().matches(password, this.password)
-}
+    @Column(nullable = false)
+    @JsonIgnore
+    val password: String,
+)

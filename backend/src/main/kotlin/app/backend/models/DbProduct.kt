@@ -13,22 +13,22 @@ import javax.persistence.Table
 
 @Entity(name = "DbProduct")
 @Table(name = "db_products")
-class DbProduct {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  val id: Int = 0
+class DbProduct(
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    val id: Int = 0,
 
-  @Column(nullable = false)
-  var name: String = ""
+    @Column(nullable = false)
+    var name: String,
 
-  @Column(nullable = false)
-  var productLink: String = ""
+    @Column(nullable = false)
+    var productLink: String,
 
-  @Column(nullable = false)
-  var comment: String = ""
+    @Column(nullable = false)
+    var comment: String,
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "list_id", nullable = false)
-  @JsonIgnore
-  lateinit var list: DbList
-}
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "list_id", nullable = false)
+    @JsonIgnore
+    val list: DbList,
+)

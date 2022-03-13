@@ -1,9 +1,9 @@
 package app.backend.dtos
 
-class AuthUserDTO {
-  var token = ""
-  var email = ""
-  var firstname = ""
-  var lastname = ""
-  var id = 0
-}
+class AuthUserDTO(
+    val id: Int,
+    val token: String,
+    val firstname: String,
+    val lastname: String,
+    val email: String,
+)
