@@ -33,16 +33,5 @@ class DbUser(
 
     @Column(nullable = false)
     @JsonIgnore
-    val password : String
-) {
-  @Column(nullable = false)
-  var password: String = ""
-    @JsonIgnore // ignore password field when returning a user
-    get() = field
-    set(value) {
-      val passwordEncoder = BCryptPasswordEncoder()
-      field = passwordEncoder.encode(value)
-    }
-
-  fun comparePassword(password: String): Boolean = BCryptPasswordEncoder().matches(password, this.password)
-}
+    val password: String,
+)

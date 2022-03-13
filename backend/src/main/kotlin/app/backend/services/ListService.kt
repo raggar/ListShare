@@ -17,16 +17,13 @@ class ListService(private val listRepository: ListRepository, private val produc
 
   fun deleteList(id: Int) = listRepository.deleteById(id)
 
-  fun addProduct(listId: Int, product: DbProduct): DbProduct {
-    val list = listRepository.findByIdOrNull(listId) ?: throw ResourceNotFoundException()
-    product.list = list
-    return productRepository.save(product)
-  }
+  fun addList(list: DbList) = listRepository.save(list)
 
   fun updateList(listId: Int, body: UpdateListDTO): DbList? {
     val list = listRepository.findByIdOrNull(listId) ?: throw ResourceNotFoundException()
 
     list.name = body.name ?: list.name
+    list.category = body.category ?: list.category
     list.shareLink = body.shareLink ?: list.shareLink
     list.comment = body.comment ?: list.comment
 
