@@ -1,7 +1,6 @@
 package app.backend.models
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity

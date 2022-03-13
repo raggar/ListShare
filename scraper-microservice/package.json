@@ -2,24 +2,23 @@
   "name": "scraper-microservice",
   "version": "1.0.0",
   "description": "Node microservice for providing information from a URL",
-  "main": "server.js",
+  "main": "index.ts",
   "type": "module",
   "scripts": {
-    "tsc": "tsc",
     "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/express": "^4.17.13",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "got": "^12.0.1",
+    "helmet": "^5.0.2",
     "metascraper": "^5.25.8",
     "metascraper-description": "^5.25.8",
     "metascraper-image": "^5.25.8",
     "metascraper-title": "^5.25.8",
-    "typescript": "^4.6.2"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
