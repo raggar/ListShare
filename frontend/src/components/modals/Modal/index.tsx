@@ -1,4 +1,8 @@
-import React, { ComponentPropsWithoutRef, Dispatch, SetStateAction } from "react";
+import React, {
+  ComponentPropsWithoutRef,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import styled from "styled-components";
 import { Modal as ReactModal } from "react-bootstrap";
 import styles from "../../../styles/styles";
@@ -24,18 +28,18 @@ const ModalContent = styled.div`
   padding: ${styles.spacing[4]};
 `;
 
+const CloseWrapper = styled.div`
+  position: absolute;
+  right: ${styles.spacing[2]};
+  top: ${styles.spacing[2]};
+
+  :hover {
+    cursor: pointer;
+    color: ${styles.colors.text.accent};
+  }
+`;
+
 function Modal(props: ModalProps) {
-  const CloseWrapper = styled.div`
-    position: absolute;
-    right: ${styles.spacing[2]};
-    top: ${styles.spacing[2]};
-
-    :hover {
-      cursor: pointer;
-      color: ${styles.colors.text.accent};
-    }
-  `;
-
   return (
     <StyledModal show={props.show} centered>
       <CloseWrapper onClick={() => props.setShow(false)}>

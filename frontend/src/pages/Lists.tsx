@@ -17,8 +17,7 @@ import styles from "../styles/styles";
 import { AddItemModal } from "../components/modals";
 import TopBar from "../components/TopBar.tsx";
 import { MdLink } from "react-icons/md";
-
-import axios from "axios";
+import { getTags } from "../api/";
 
 // todo: fix media queries
 const LayoutContainer = styled.div`
@@ -39,28 +38,9 @@ const LayoutContainer = styled.div`
   }
 `;
 
-const api = axios.create({
-  baseURL: process.env.REACT_APP_SCRAPER_URL,
-});
-export interface LinkItem {
-  title: string;
-  description: string;
-  image: string;
-}
-
 const Lists: React.FC = () => {
   const [show, setShow] = useState(false);
   const [url, setUrl] = useState("");
-
-  const getTags = (url: string) => {
-    return api
-      .get<LinkItem>("/scrape", {
-        params: {
-          url: url,
-        },
-      })
-      .then((response) => response.data);
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
